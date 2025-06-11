@@ -4,6 +4,8 @@ import {
   PHARAOH_ROUTER_ADDRESS,
   PHARAOH_ROUTER_ABI,
   WAVAX_ADDRESS,
+  PHARAOH_FACTORY_ADDRESS,
+  PHARAOH_FACTORY_ABI,
 } from "@/lib/constants";
 import { web3Config } from "@/context/Web3Context";
 import { waitForWagmiTxReceipt } from "./tx";
@@ -154,6 +156,33 @@ export const getAmountOut = async (
   }
 
   return { amountOut, stable };
+};
+
+export const getPairAddressFor = async (
+  tokenInAddress: string,
+  tokenOutAddress: string,
+  stable: boolean
+): Promise<string | null> => {
+  try {
+    // Get pair address from factory
+    const pairContractAddress = await readContract(web3Config, {
+      address: PHARAOH_FACTORY_ADDRESS as `0x${string}`,
+      abi: PHARAOH_FACTORY_ABI,
+      functionName: "getPair",
+      args: [tokenInAddress, tokenOutAddress, stable],
+    });
+    if (
+      !pairContractAddress ||
+      pairContractAddress === "0x0000000000000000000000000000000000000000"
+    ) {
+      return null;
+    }
+    return pairContractAddress.toString();
+  } catch (error) {
+    console.error("Error getting pair address:", error);
+    return null;
+  }
+  return null;
 };
 
 // export const getAmountIn = async (

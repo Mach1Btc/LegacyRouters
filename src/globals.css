@@ -24,10 +24,18 @@
 
   --color-error-red: rgb(255, 73, 74);
 
+  --color-lfj-purple: rgb(132, 112, 252);
+  --color-lfj-purple-hover: rgb(169, 155, 253);
+
+  --color-pharaoh-red: rgb(185, 58, 44);
+  --color-pharaoh-red-hover: rgb(206, 117, 107);
+
   --text-xxs: 0.625rem;
   --text-xxs--line-height: calc(1 / 0.625);
   --text-xxxs: 0.5rem;
   --text-xxxs--line-height: calc(1 / 0.5);
+
+  --font-mono: "Courier New", monospace;
 }
 
 body {
@@ -132,4 +140,12 @@ body {
 
 .swap-button {
   @apply bg-secondary-blue hover:bg-secondary-blue-hover text-white flex gap-2 w-full items-center;
+}
+
+.lfj-swap-button {
+  @apply bg-lfj-purple hover:bg-lfj-purple-hover text-white flex gap-2 w-full items-center;
+}
+
+.pharaoh-swap-button {
+  @apply bg-pharaoh-red hover:bg-pharaoh-red-hover text-white flex gap-2 w-full items-center;
 }

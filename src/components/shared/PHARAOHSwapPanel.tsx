@@ -5,9 +5,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
-import { Loader, SlippageInput, TokenSearchChooser } from '@/components/shared';
+import { Loader, SlippageInput, TokenSearchChooser, AddressCopyLink } from '@/components/shared';
 import { Separator } from '@/components/ui/separator';
-import { Switch } from "@/components/ui/switch"
+import { Switch } from "@/components/ui/switch";
 import BN from 'bn.js';
 import { defaultSlippage, explorer_url, PHARAOH_ROUTER_ADDRESS, safeModeEnabledMaxSlippage, sample_token_list, WAVAX_ADDRESS } from '@/lib/constants';
 import { Token, TokenList } from '@/lib/types';
@@ -15,8 +15,8 @@ import { formatBN, scaleToBN } from '@/lib/utils';
 import { useUserContext } from '@/context/AuthContext';
 import { approveERC20Amount, getERC20Allowance, importNewERC20Token } from '@/lib/ERC20';
 import { toast } from "sonner"
-import { createUnwrapAvaxTransaction, createWrapAvaxTransaction } from '@/lib/WAVAX';
-import { createSwapTransaction, getAmountOut } from '@/lib/PHARAOH';
+import { WrapUtils } from '@/lib/WAVAX';
+import { getAmountOut, createSwapTransaction, getPairAddressFor } from '@/lib/PHARAOH';
 
 
 const PHARAOHSwapPanel = () => {
@@ -60,7 +60,9 @@ const PHARAOHSwapPanel = () => {
 
     const [debounceTimer, setDebounceTimer] = useState<NodeJS.Timeout | null>(null);
 
-    //const [pairExists, setPairExists] = useState<boolean>(true);
+    const [pairMap, setPairMap] = useState<Map<string, string>>(new Map());
+    const [currentPairExists, setCurrentPairExists] = useState<boolean>(true);
+    const [currentPairAddress, setCurrentPairAddress] = useState<string>('');
 
     const clearPanel = () => {
         setFromAmountInputValue('');
@@ -145,33 +147,22 @@ const PHARAOHSwapPanel = () => {
     };
 
     const handleSwapButtonClick = async (): Promise<void> => {
-        // Early return if wallet not connected
         if (!account.address) {
             toast.error("Please connect your wallet to swap tokens.");
             return;
         }
-
-        // Early return if no amounts to swap
         if (fromAmount.isZero() && toAmount.isZero()) {
             return;
         }
-
-        const isUnwrapping = fromToken.address === WAVAX_ADDRESS && toToken.address === "0xAVAX";
-        const isWrapping = fromToken.address === "0xAVAX" && toToken.address === WAVAX_ADDRESS;
-        const isWrapOperation = isWrapping || isUnwrapping;
-
-        // Calculate required allowance for approval check
+        const isWrapOperation = WrapUtils.isWrapOperation(fromToken, toToken);
         const requiredAllowance = isFromAmountExact
             ? fromAmount
             : amountInComputed.mul(new BN(100 + allowedSlippage)).div(new BN(100));
-
         const hasEnoughAllowance = isWrapOperation || fromTokenAllowance.gte(requiredAllowance);
-
         setIsLoading(true);
-
         try {
             if (hasEnoughAllowance) {
-                await executeSwap(isWrapping, isUnwrapping, account.address);
+                await executeSwap(isWrapOperation, account.address);
             } else {
                 await approveTokens(requiredAllowance);
             }
@@ -181,14 +172,11 @@ const PHARAOHSwapPanel = () => {
         }
     };
 
-    // Helper function for executing the actual swap
-    const executeSwap = async (isWrapping: boolean, isUnwrapping: boolean, accountAddress: string): Promise<void> => {
+    const executeSwap = async (isWrapOperation: boolean, accountAddress: string): Promise<void> => {
         let result: { success: boolean; txHash?: string };
-
-        if (isWrapping) {
-            result = await createWrapAvaxTransaction(accountAddress, fromAmount);
-        } else if (isUnwrapping) {
-            result = await createUnwrapAvaxTransaction(accountAddress, fromAmount);
+        if (isWrapOperation) {
+            const amount = WrapUtils.getWrapAmount(fromAmount, toAmount, isFromAmountExact);
+            result = await WrapUtils.executeWrapOperation(fromToken, toToken, accountAddress, amount);
         } else if (isFromAmountExact) {
             result = await createSwapTransaction(
                 accountAddress,
@@ -214,7 +202,6 @@ const PHARAOHSwapPanel = () => {
                 supportFeeTokens
             );
         }
-
         handleTransactionResult(result, "Swap");
     };
 
@@ -284,6 +271,56 @@ const PHARAOHSwapPanel = () => {
         const retrivedToken = await importNewERC20Token(address);
         return retrivedToken;
     }
+
+    const generatePairKey = (tokenA: string, tokenB: string, stable: boolean): string => {
+        // Sort addresses to ensure consistent key regardless of order
+        const sortedTokens = [tokenA.toLowerCase(), tokenB.toLowerCase()].sort();
+        return `${sortedTokens[0]},${sortedTokens[1]},${stable}`;
+    };
+
+    const checkAndCachePairAddress = async (tokenInAddress: string, tokenOutAddress: string, stable: boolean): Promise<void> => {
+        const adjustedTokenIn = WrapUtils.normalizeAddress(tokenInAddress);
+        const adjustedTokenOut = WrapUtils.normalizeAddress(tokenOutAddress);
+        const pairKey = generatePairKey(adjustedTokenIn, adjustedTokenOut, stable);
+        if (pairMap.has(pairKey)) {
+            const cachedAddress = pairMap.get(pairKey)!;
+            setCurrentPairAddress(cachedAddress);
+            setCurrentPairExists(cachedAddress !== '');
+            return;
+        }
+        const fetchedPairAddress = await getPairAddressFor(adjustedTokenIn, adjustedTokenOut, stable);
+        const pairExists = fetchedPairAddress !== null;
+        const addressToStore = pairExists ? fetchedPairAddress : '';
+        setPairMap(prev => new Map(prev.set(pairKey, addressToStore)));
+        setCurrentPairAddress(addressToStore);
+        setCurrentPairExists(pairExists);
+    };
+
+    const getRequiredAllowance = () => {
+        if (isFromAmountExact) {
+            return fromAmount;
+        } else {
+            return amountInComputed.mul(new BN(10000 + (allowedSlippage * 100))).div(new BN(10000));
+        }
+    };
+
+    const requiredAllowance = getRequiredAllowance();
+    const hasEnoughAllowance = fromTokenAllowance.gte(requiredAllowance);
+
+    const getButtonText = () => {
+        if (isLoading) return <div className="flex w-full items-center justify-center"><Loader /></div>;
+        if (!currentPairExists) return "Pair Not Found";
+        if (!isConnected || !account.address) return "Connect";
+
+        const exceedsBalance = (!isFromAmountExact && amountInComputed.gt(fromBalance)) ||
+            (isFromAmountExact && fromAmount.gt(fromBalance));
+        if (exceedsBalance) return "Exceeds Balance";
+
+        const isWrapOperation = WrapUtils.isWrapOperation(fromToken, toToken);
+        if (hasEnoughAllowance || isWrapOperation) return "Swap";
+
+        return "Approve";
+    };
 
     useEffect(() => {
         // if to or from token changed to same token, force update using last token
@@ -393,6 +430,15 @@ const PHARAOHSwapPanel = () => {
         }
     }, [safeModeEnabled]);
 
+    useEffect(() => {
+        if (WrapUtils.isWrapOperation(fromToken, toToken)) {
+            setCurrentPairExists(true);
+            setCurrentPairAddress(WAVAX_ADDRESS);
+        } else {
+            checkAndCachePairAddress(fromToken.address, toToken.address, useStablePool);
+        }
+    }, [fromToken, toToken, useStablePool, pairMap]);
+
     return (
         <div className='flex flex-col gap-1 items-center justify-start'>
             <div>
@@ -455,7 +501,6 @@ const PHARAOHSwapPanel = () => {
                                                         onCheckedChange={setSupportFeeTokens} />
                                                     <span> Support Fee/Reflection Tokens</span>
                                                 </div>
-
                                             </div>
                                         </PopoverContent>
                                     </Popover>
@@ -472,8 +517,8 @@ const PHARAOHSwapPanel = () => {
                             </div>
                             <div className='w-full p-2'>
                                 <Button
-                                    disabled={isLoading || fromAmount.isZero() || fromAmount.gt(fromBalance)}
-                                    className="swap-button"
+                                    disabled={isLoading || (fromAmount.isZero() && toAmount.isZero()) || (!isFromAmountExact && amountInComputed.gt(fromBalance)) || (isFromAmountExact && fromAmount.gt(fromBalance))}
+                                    className="pharaoh-swap-button"
                                     onClick={() => {
                                         if (isConnected) {
                                             handleSwapButtonClick();
@@ -482,22 +527,26 @@ const PHARAOHSwapPanel = () => {
                                         }
                                     }}
                                 >
-                                    {isLoading ? (
-                                        <div className="flex w-full items-center justify-center">
-                                            <Loader />
-                                        </div>
-
-                                    ) : isConnected && account.address ? fromAmount.gt(fromBalance) ? ("Exceeds Balance") : (
-                                        (fromTokenAllowance.gte(fromAmount) && isFromAmountExact) ||
-                                            (fromTokenAllowance.gte(amountInComputed.mul(new BN(10000 + (allowedSlippage * 100))).div(new BN(10000))) && !isFromAmountExact) ? (
-                                            "Swap"
-                                        ) : (
-                                            "Approve"
-                                        )
-                                    ) : (
-                                        "Connect"
-                                    )}
+                                    {getButtonText()}
                                 </Button>
+                                <div className="flex flex-col w-full mt-4 font-mono">
+                                    <div className='flex flex-row justify-between text-xs text-gray-600'>
+                                        <span className='pointer-events-none select-none'>Router:</span>
+                                        <AddressCopyLink address={PHARAOH_ROUTER_ADDRESS} copyButton={true} externalLink={true} />
+                                    </div>
+                                    <div className='flex flex-row justify-between text-xs text-gray-600'>
+                                        <span className='pointer-events-none select-none'>Pair:</span>
+                                        {currentPairExists ? (
+                                            <AddressCopyLink address={currentPairAddress} copyButton={true} externalLink={true} />
+                                        ) : (
+                                            <span className='text-red-500'>Pair Not Found</span>
+                                        )}
+                                    </div>
+                                    <div className='flex flex-row justify-between text-xs text-gray-600'>
+                                        <span className='pointer-events-none select-none'>Type:</span>
+                                        <span className='pointer-events-none mr-7'>{useStablePool ? "stable" : "volatile"}</span>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>

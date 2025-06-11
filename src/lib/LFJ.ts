@@ -289,3 +289,30 @@ export const getAmountIn = async (
 
   return amountIn;
 };
+
+export const getPairAddressFor = async (
+  tokenInAddress: string,
+  tokenOutAddress: string
+): Promise<string | null> => {
+  try {
+    // Get pair address from factory
+    const pairContractAddress = await readContract(web3Config, {
+      address: LFJ_FACTORY_ADDRESS as `0x${string}`,
+      abi: LFJ_FACTORY_ABI,
+      functionName: "getPair",
+      args: [tokenInAddress, tokenOutAddress],
+    });
+
+    if (
+      !pairContractAddress ||
+      pairContractAddress === "0x0000000000000000000000000000000000000000"
+    ) {
+      return null;
+    }
+
+    return pairContractAddress.toString();
+  } catch (error) {
+    console.error("Error getting pair address:", error);
+    return null;
+  }
+};

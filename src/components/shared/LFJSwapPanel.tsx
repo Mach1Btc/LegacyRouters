@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
-import { Loader, SlippageInput, TokenSearchChooser } from '@/components/shared';
+import { AddressCopyLink, Loader, SlippageInput, TokenSearchChooser } from '@/components/shared';
 import { Separator } from '@/components/ui/separator';
 import { Switch } from "@/components/ui/switch"
 import BN from 'bn.js';
@@ -15,18 +15,15 @@ import { formatBN, scaleToBN } from '@/lib/utils';
 import { useUserContext } from '@/context/AuthContext';
 import { approveERC20Amount, getERC20Allowance, importNewERC20Token } from '@/lib/ERC20';
 import { toast } from "sonner"
-import { createUnwrapAvaxTransaction, createWrapAvaxTransaction } from '@/lib/WAVAX';
-import { createSwapTransaction, getAmountIn, getAmountOut } from '@/lib/LFJ';
+import { WrapUtils } from '@/lib/WAVAX';
+import { createSwapTransaction, getAmountIn, getAmountOut, getPairAddressFor } from '@/lib/LFJ';
 
 
 const LFJSwapPanel = () => {
 
     const { account, isConnected, update, refresh } = useUserContext();
-
     const [isLoading, setIsLoading] = useState<boolean>(false);
-
     const [tokenList,] = useState<TokenList>(sample_token_list);
-
     const { openConnectModal } = useConnectModal();
 
     const [fromToken, setFromToken] = useState<Token>(tokenList["0xAVAX"]);
@@ -58,7 +55,9 @@ const LFJSwapPanel = () => {
 
     const [debounceTimer, setDebounceTimer] = useState<NodeJS.Timeout | null>(null);
 
-    //const [pairExists, setPairExists] = useState<boolean>(true);
+    const [pairMap, setPairMap] = useState<Map<string, string>>(new Map());
+    const [currentPairExists, setCurrentPairExists] = useState<boolean>(true);
+    const [currentPairAddress, setCurrentPairAddress] = useState<string>('');
 
     const clearPanel = () => {
         setFromAmountInputValue('');
@@ -125,6 +124,7 @@ const LFJSwapPanel = () => {
         setLastToToken(lastFromToken);
         setFromToken(tempToToken);
         setLastFromToken(tempLastToToken);
+        setFromTokenAllowance(new BN(0));
     };
 
     const onFromTokenChange = (value: Token) => {
@@ -140,22 +140,17 @@ const LFJSwapPanel = () => {
     };
 
     const handleSwapButtonClick = async (): Promise<void> => {
-        // Early return if wallet not connected
         if (!account.address) {
             toast.error("Please connect your wallet to swap tokens.");
             return;
         }
 
-        // Early return if no amounts to swap
         if (fromAmount.isZero() && toAmount.isZero()) {
             return;
         }
 
-        const isUnwrapping = fromToken.address === WAVAX_ADDRESS && toToken.address === "0xAVAX";
-        const isWrapping = fromToken.address === "0xAVAX" && toToken.address === WAVAX_ADDRESS;
-        const isWrapOperation = isWrapping || isUnwrapping;
+        const isWrapOperation = WrapUtils.isWrapOperation(fromToken, toToken);
 
-        // Calculate required allowance for approval check
         const requiredAllowance = isFromAmountExact
             ? fromAmount
             : amountInComputed.mul(new BN(100 + allowedSlippage)).div(new BN(100));
@@ -166,7 +161,7 @@ const LFJSwapPanel = () => {
 
         try {
             if (hasEnoughAllowance) {
-                await executeSwap(isWrapping, isUnwrapping, account.address);
+                await executeSwap(isWrapOperation, account.address);
             } else {
                 await approveTokens(requiredAllowance);
             }
@@ -177,13 +172,12 @@ const LFJSwapPanel = () => {
     };
 
     // Helper function for executing the actual swap
-    const executeSwap = async (isWrapping: boolean, isUnwrapping: boolean, accountAddress: string): Promise<void> => {
+    const executeSwap = async (isWrapOperation: boolean, accountAddress: string): Promise<void> => {
         let result: { success: boolean; txHash?: string };
 
-        if (isWrapping) {
-            result = await createWrapAvaxTransaction(accountAddress, fromAmount);
-        } else if (isUnwrapping) {
-            result = await createUnwrapAvaxTransaction(accountAddress, fromAmount);
+        if (isWrapOperation) {
+            const amount = WrapUtils.getWrapAmount(fromAmount, toAmount, isFromAmountExact);
+            result = await WrapUtils.executeWrapOperation(fromToken, toToken, accountAddress, amount);
         } else if (isFromAmountExact) {
             result = await createSwapTransaction(
                 accountAddress,
@@ -278,6 +272,60 @@ const LFJSwapPanel = () => {
         return retrivedToken;
     }
 
+    const generatePairKey = (tokenA: string, tokenB: string): string => {
+        // Sort addresses to ensure consistent key regardless of order
+        const sortedTokens = [tokenA.toLowerCase(), tokenB.toLowerCase()].sort();
+        return `${sortedTokens[0]},${sortedTokens[1]}`;
+    };
+
+    const checkAndCachePairAddress = async (tokenInAddress: string, tokenOutAddress: string): Promise<void> => {
+        const adjustedTokenIn = WrapUtils.normalizeAddress(tokenInAddress);
+        const adjustedTokenOut = WrapUtils.normalizeAddress(tokenOutAddress);
+
+        const pairKey = generatePairKey(adjustedTokenIn, adjustedTokenOut);
+
+        if (pairMap.has(pairKey)) {
+            const cachedAddress = pairMap.get(pairKey)!;
+            setCurrentPairAddress(cachedAddress);
+            setCurrentPairExists(cachedAddress !== '');
+            return;
+        }
+
+        const fetchedPairAddress = await getPairAddressFor(adjustedTokenIn, adjustedTokenOut);
+        const pairExists = fetchedPairAddress !== null;
+        const addressToStore = pairExists ? fetchedPairAddress : '';
+
+        setPairMap(prev => new Map(prev.set(pairKey, addressToStore)));
+        setCurrentPairAddress(addressToStore);
+        setCurrentPairExists(pairExists);
+    };
+
+    const getRequiredAllowance = () => {
+        if (isFromAmountExact) {
+            return fromAmount;
+        } else {
+            return amountInComputed.mul(new BN(10000 + (allowedSlippage * 100))).div(new BN(10000));
+        }
+    };
+
+    const requiredAllowance = getRequiredAllowance();
+    const hasEnoughAllowance = fromTokenAllowance.gte(requiredAllowance);
+
+    const getButtonText = () => {
+        if (isLoading) return <div className="flex w-full items-center justify-center"><Loader /></div>;
+        if (!currentPairExists) return "Pair Not Found";
+        if (!isConnected || !account.address) return "Connect";
+
+        const exceedsBalance = (!isFromAmountExact && amountInComputed.gt(fromBalance)) ||
+            (isFromAmountExact && fromAmount.gt(fromBalance));
+        if (exceedsBalance) return "Exceeds Balance";
+
+        const isWrapOperation = WrapUtils.isWrapOperation(fromToken, toToken);
+        if (hasEnoughAllowance || isWrapOperation) return "Swap";
+
+        return "Approve";
+    };
+
     useEffect(() => {
         // if to or from token changed to same token, force update using last token
         if (fromToken === toToken) {
@@ -300,14 +348,15 @@ const LFJSwapPanel = () => {
     }, [safeModeEnabled]);
 
     useEffect(() => {
-        const isWrapping = fromToken.address === "0xAVAX" && toToken.address === WAVAX_ADDRESS;
-        const isUnwrapping = toToken.address === "0xAVAX" && fromToken.address === WAVAX_ADDRESS;
         const getOutputAmount = async () => {
-            if ((isWrapping || isUnwrapping) && fromAmount.gt(new BN(0))) {
-                setToAmountInputValue(formatBN(fromAmount, 18)); // always 18 for WAVAX or AVAX
+            if (WrapUtils.isWrapOperation(fromToken, toToken) && fromAmount.gt(new BN(0))) {
+                setToAmountInputValue(formatBN(fromAmount, 18)); // WAVAX/AVAX always 18 decimals
                 setAmountOutComputed(fromAmount);
             } else if (fromAmount.gt(new BN(0))) {
-                const amountOut = await getAmountOut(fromToken.address === "0xAVAX" ? WAVAX_ADDRESS.toString() : fromToken.address, toToken.address === "0xAVAX" ? WAVAX_ADDRESS.toString() : toToken.address, fromAmount);
+                const adjustedFromAddress = WrapUtils.normalizeAddress(fromToken.address);
+                const adjustedToAddress = WrapUtils.normalizeAddress(toToken.address);
+
+                const amountOut = await getAmountOut(adjustedFromAddress, adjustedToAddress, fromAmount);
                 if (amountOut !== null) {
                     setToAmountInputValue(formatBN(amountOut, toToken.decimals));
                     setAmountOutComputed(amountOut);
@@ -318,20 +367,22 @@ const LFJSwapPanel = () => {
             }
             setIsLoading(false);
         };
+
         if (isFromAmountExact) {
             getOutputAmount();
         }
     }, [fromAmount, toToken, fromToken]);
 
     useEffect(() => {
-        const isWrapping = fromToken.address === "0xAVAX" && toToken.address === WAVAX_ADDRESS;
-        const isUnwrapping = toToken.address === "0xAVAX" && fromToken.address === WAVAX_ADDRESS;
         const getInAmount = async () => {
-            if ((isWrapping || isUnwrapping) && toAmount.gt(new BN(0))) {
-                setFromAmountInputValue(formatBN(toAmount, 18)); // always 18 for WAVAX or AVAX
+            if (WrapUtils.isWrapOperation(fromToken, toToken) && toAmount.gt(new BN(0))) {
+                setFromAmountInputValue(formatBN(toAmount, 18)); // WAVAX/AVAX always 18 decimals
                 setAmountInComputed(toAmount);
             } else if (toAmount.gt(new BN(0))) {
-                const amountIn = await getAmountIn(fromToken.address === "0xAVAX" ? WAVAX_ADDRESS.toString() : fromToken.address, toToken.address === "0xAVAX" ? WAVAX_ADDRESS.toString() : toToken.address, toAmount);
+                const adjustedFromAddress = WrapUtils.normalizeAddress(fromToken.address);
+                const adjustedToAddress = WrapUtils.normalizeAddress(toToken.address);
+
+                const amountIn = await getAmountIn(adjustedFromAddress, adjustedToAddress, toAmount);
                 if (amountIn !== null) {
                     setFromAmountInputValue(formatBN(amountIn, fromToken.decimals));
                     setAmountInComputed(amountIn);
@@ -342,6 +393,7 @@ const LFJSwapPanel = () => {
             }
             setIsLoading(false);
         };
+
         if (!isFromAmountExact) {
             getInAmount();
         }
@@ -350,17 +402,21 @@ const LFJSwapPanel = () => {
     useEffect(() => {
         const getFromTokenAllowance = async () => {
             if (!account.address) return;
-            if (fromToken.address !== "0xAVAX" && fromAmount.gt(new BN(0))) {
+
+            const needsAllowanceCheck = fromAmount.gt(new BN(0)) || amountInComputed.gt(new BN(0));
+
+            if (WrapUtils.needsAllowance(fromToken.address) && needsAllowanceCheck) {
                 const allowance = await getERC20Allowance(account.address, LFJ_ROUTER_ADDRESS, fromToken.address);
                 if (allowance !== null) {
                     setFromTokenAllowance(allowance);
                 }
-            } else if (fromToken.address === "0xAVAX") {
-                setFromTokenAllowance(new BN("720000000000000000000000000"));
+            } else if (!WrapUtils.needsAllowance(fromToken.address)) {
+                setFromTokenAllowance(new BN("720000000000000000000000000")); // Large number for AVAX
             }
         };
+
         getFromTokenAllowance();
-    }, [account, fromAmount, fromToken, refresh]);
+    }, [account, fromAmount, amountInComputed, fromToken, refresh]);
 
     useEffect(() => {
         if (account.balances) {
@@ -384,6 +440,16 @@ const LFJSwapPanel = () => {
             setHasWarned(true);
         }
     }, [safeModeEnabled]);
+
+    useEffect(() => {
+        if (WrapUtils.isWrapOperation(fromToken, toToken)) {
+            // Wrap/unwrap operations don't need pair checking
+            setCurrentPairExists(true);
+            setCurrentPairAddress(WAVAX_ADDRESS);
+        } else {
+            checkAndCachePairAddress(fromToken.address, toToken.address);
+        }
+    }, [fromToken, toToken, pairMap]);
 
     return (
         <div className='flex flex-col gap-1 items-center justify-start'>
@@ -465,8 +531,12 @@ const LFJSwapPanel = () => {
                             </div>
                             <div className='w-full p-2'>
                                 <Button
-                                    disabled={isLoading || fromAmount.isZero() || fromAmount.gt(fromBalance)}
-                                    className="swap-button"
+                                    disabled={isLoading ||
+                                        (fromAmount.isZero() && toAmount.isZero()) ||
+                                        (!isFromAmountExact && amountInComputed.gt(fromBalance)) ||
+                                        (isFromAmountExact && fromAmount.gt(fromBalance))
+                                    }
+                                    className="lfj-swap-button"
                                     onClick={() => {
                                         if (isConnected) {
                                             handleSwapButtonClick();
@@ -475,22 +545,22 @@ const LFJSwapPanel = () => {
                                         }
                                     }}
                                 >
-                                    {isLoading ? (
-                                        <div className="flex w-full items-center justify-center">
-                                            <Loader />
-                                        </div>
-
-                                    ) : isConnected && account.address ? fromAmount.gt(fromBalance) ? ("Exceeds Balance") : (
-                                        (fromTokenAllowance.gte(fromAmount) && isFromAmountExact) ||
-                                            (fromTokenAllowance.gte(amountInComputed.mul(new BN(10000 + (allowedSlippage * 100))).div(new BN(10000))) && !isFromAmountExact) ? (
-                                            "Swap"
-                                        ) : (
-                                            "Approve"
-                                        )
-                                    ) : (
-                                        "Connect"
-                                    )}
+                                    {getButtonText()}
                                 </Button>
+                                <div className="flex flex-col w-full mt-4 font-mono">
+                                    <div className='flex flex-row justify-between text-xs text-gray-600'>
+                                        <span className='pointer-events-none select-none'>Router:</span>
+                                        <AddressCopyLink address={LFJ_ROUTER_ADDRESS} copyButton={true} externalLink={true} />
+                                    </div>
+                                    <div className='flex flex-row justify-between text-xs text-gray-600'>
+                                        <span className='pointer-events-none select-none'>Pair:</span>
+                                        {currentPairExists ? (
+                                            <AddressCopyLink address={currentPairAddress} copyButton={true} externalLink={true} />
+                                        ) : (
+                                            <span className='text-red-500 font-mono'>Pair Not Found</span>
+                                        )}
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
