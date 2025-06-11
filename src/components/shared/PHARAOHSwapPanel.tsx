@@ -393,8 +393,6 @@ const PHARAOHSwapPanel = () => {
         }
     }, [safeModeEnabled]);
 
-    console.log(fromTokenAllowance.toString());
-
     return (
         <div className='flex flex-col gap-1 items-center justify-start'>
             <div>
@@ -474,7 +472,7 @@ const PHARAOHSwapPanel = () => {
                             </div>
                             <div className='w-full p-2'>
                                 <Button
-                                    disabled={isLoading || fromAmount.isZero()}
+                                    disabled={isLoading || fromAmount.isZero() || fromAmount.gt(fromBalance)}
                                     className="swap-button"
                                     onClick={() => {
                                         if (isConnected) {
@@ -489,7 +487,7 @@ const PHARAOHSwapPanel = () => {
                                             <Loader />
                                         </div>
 
-                                    ) : isConnected && account.address ? (
+                                    ) : isConnected && account.address ? fromAmount.gt(fromBalance) ? ("Exceeds Balance") : (
                                         (fromTokenAllowance.gte(fromAmount) && isFromAmountExact) ||
                                             (fromTokenAllowance.gte(amountInComputed.mul(new BN(10000 + (allowedSlippage * 100))).div(new BN(10000))) && !isFromAmountExact) ? (
                                             "Swap"

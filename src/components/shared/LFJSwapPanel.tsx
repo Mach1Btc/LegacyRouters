@@ -465,7 +465,7 @@ const LFJSwapPanel = () => {
                             </div>
                             <div className='w-full p-2'>
                                 <Button
-                                    disabled={isLoading || fromAmount.isZero()}
+                                    disabled={isLoading || fromAmount.isZero() || fromAmount.gt(fromBalance)}
                                     className="swap-button"
                                     onClick={() => {
                                         if (isConnected) {
@@ -480,7 +480,7 @@ const LFJSwapPanel = () => {
                                             <Loader />
                                         </div>
 
-                                    ) : isConnected && account.address ? (
+                                    ) : isConnected && account.address ? fromAmount.gt(fromBalance) ? ("Exceeds Balance") : (
                                         (fromTokenAllowance.gte(fromAmount) && isFromAmountExact) ||
                                             (fromTokenAllowance.gte(amountInComputed.mul(new BN(10000 + (allowedSlippage * 100))).div(new BN(10000))) && !isFromAmountExact) ? (
                                             "Swap"

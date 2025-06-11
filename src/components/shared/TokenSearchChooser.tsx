@@ -18,6 +18,7 @@ import { Token } from '@/lib/types';
 import { setCookie, getCookie } from '@/lib/utils';
 import { cn } from "@/lib/utils";
 import { Loader } from '@/components/shared';
+import { useUserContext } from '@/context/AuthContext';
 
 interface TokenSearchChooserProps {
     startSelected: Token;
@@ -34,6 +35,7 @@ const TokenSearchChooser: FC<TokenSearchChooserProps> = ({
     onSelection,
     onImport
 }) => {
+    const { getUserTokenBal } = useUserContext();
     const [mounted, setMounted] = useState(false);
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState<string>(startSelected.address);
@@ -56,6 +58,14 @@ const TokenSearchChooser: FC<TokenSearchChooserProps> = ({
         }
         setMounted(true);
     }, []);
+
+    useEffect(() => {
+        if (mounted && Object.keys(importedTokens).length > 0) {
+            Object.entries(importedTokens).forEach(([address,]: [string, Token]) => {
+                getUserTokenBal(address);
+            });
+        }
+    }, [mounted, importedTokens, getUserTokenBal]);
 
     useEffect(() => {
         setValue(startSelected.address);
@@ -119,6 +129,7 @@ const TokenSearchChooser: FC<TokenSearchChooserProps> = ({
         try {
             const token = await onImport(searchValue);
             if (token) {
+                getUserTokenBal(token.address);
                 const updatedImported = {
                     ...importedTokens,
                     [searchValue]: token
