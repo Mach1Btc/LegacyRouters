@@ -24,7 +24,7 @@ const Bottombar = () => {
                         <img
                             src="/assets/PoweredbyAvalanche_BlackWhite 1.svg"
                             alt="Powered by Avalanche"
-                            className="w-64 h-16"
+                            className="w-32 h-8 sm:w-64 sm:h-16"
                         />
                     </a>
                 </div>

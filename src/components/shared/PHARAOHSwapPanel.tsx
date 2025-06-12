@@ -444,7 +444,7 @@ const PHARAOHSwapPanel = () => {
     return (
         <div className='flex flex-col gap-1 items-center justify-start'>
             <div>
-                <Card className='card w-[540px] shadow-2xl mb-10'>
+                <Card className='card swap-card'>
                     <CardContent className='p-4'>
                         <div className='flex-1 flex flex-col px-3'>
                             <div className='flex-1 flex flex-row p-2 pb-0 items-center'>
@@ -540,21 +540,21 @@ const PHARAOHSwapPanel = () => {
                                 >
                                     {getButtonText()}
                                 </Button>
-                                <div className="flex flex-col w-full mt-4 font-mono">
-                                    <div className='flex flex-row justify-between text-xs text-gray-600'>
+                                <div className="flex flex-col w-full mt-4 info-text">
+                                    <div className='flex flex-row justify-between '>
                                         <span className='pointer-events-none select-none'>Router:</span>
                                         <AddressCopyLink address={PHARAOH_ROUTER_ADDRESS} copyButton={true} externalLink={true} />
                                     </div>
-                                    <div className='flex flex-row justify-between text-xs text-gray-600'>
-                                        <span className='pointer-events-none select-none'>Pair:</span>
+                                    <div className='flex flex-row justify-between'>
+                                        <span className='no-select'>Pair:</span>
                                         {currentPairExists ? (
                                             <AddressCopyLink address={currentPairAddress} copyButton={true} externalLink={true} />
                                         ) : (
                                             <span className='text-red-500'>Pair Not Found</span>
                                         )}
                                     </div>
-                                    <div className='flex flex-row justify-between text-xs text-gray-600'>
-                                        <span className='pointer-events-none select-none'>Type:</span>
+                                    <div className='flex flex-row justify-between'>
+                                        <span className='no-select'>Type:</span>
                                         <span className='pointer-events-none mr-7'>{useStablePool ? "stable" : "volatile"}</span>
                                     </div>
                                 </div>

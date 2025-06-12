@@ -173,3 +173,15 @@ body {
 .uniswap-swap-button {
   @apply bg-uniswap-pink hover:bg-uniswap-pink-hover text-white flex gap-2 w-full items-center cursor-pointer;
 }
+
+.swap-card {
+  @apply w-[360px] sm:w-[540px] shadow-2xl mb-20;
+}
+
+.info-text {
+  @apply font-mono text-gray-600 text-xxxs sm:text-xs;
+}
+
+.no-select {
+  @apply pointer-events-none select-none;
+}
