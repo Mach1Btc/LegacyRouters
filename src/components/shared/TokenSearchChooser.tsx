@@ -206,7 +206,7 @@ const TokenSearchChooser: FC<TokenSearchChooserProps> = ({
                             onValueChange={setSearchValue}
                             className='border-gray-400'
                         />
-                        <CommandList>
+                        <CommandList className='max-h-[150px] sm:max-h-[300px]'>
                             <CommandEmpty>
                                 {mightBeAddress && onImport && !importError ? (
                                     <Button
