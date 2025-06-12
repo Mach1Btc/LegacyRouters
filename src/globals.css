@@ -59,11 +59,11 @@ body {
 }
 
 .logo {
-  @apply text-xl sm:text-2xl font-bold flex items-center gap-2 mr-10;
+  @apply text-xl sm:text-2xl font-bold flex items-center gap-2 pr-6;
 }
 
 .topbar-links {
-  @apply hidden sm:flex flex-row gap-5;
+  @apply hidden lg:flex flex-row gap-4;
 }
 
 .topbar-link {
@@ -99,7 +99,7 @@ body {
 }
 
 .connect-network-switch {
-  @apply px-2 py-2 bg-white dark:bg-dark-2 rounded-xl font-semibold flex flex-row gap-1 drop-shadow-md transform hover:scale-105 transition-transform duration-300 text-xxs sm:text-base;
+  @apply px-2 py-2 bg-white dark:bg-dark-2 rounded-xl font-semibold flex flex-row gap-1 drop-shadow-md transform hover:scale-105 transition-transform duration-300 text-xs sm:text-base;
 }
 
 .connect-account-display {
@@ -107,7 +107,7 @@ body {
 }
 
 .connect-account-address {
-  @apply px-2 py-1 md:ml-1 bg-light-1 dark:bg-dark-1 rounded-xl flex flex-row items-center gap-1 text-xxs sm:text-base;
+  @apply px-2 py-1 md:ml-1 bg-light-1 dark:bg-dark-1 rounded-xl flex flex-row items-center gap-1 text-sm sm:text-base;
 }
 
 .btn {

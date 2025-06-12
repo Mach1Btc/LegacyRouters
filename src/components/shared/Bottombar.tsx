@@ -7,7 +7,10 @@ const Bottombar = () => {
             <div className='bottombar'>
                 <div className='flex flex-col items-center'>
                     <div className='logo'>
-                        Legacy Routers
+                        <div className="rounded-md bg-ava-red p-2 h-8 w-8">
+                            <img src="assets/Avalanche_Logomark_White.svg" />
+                        </div>
+                        <span>Legacy Routers</span>
                     </div>
                     <span>&copy; 2025 Legacy Routers</span>
                 </div>
@@ -16,6 +19,13 @@ const Bottombar = () => {
                     {/* <a href="" target="_blank" className="bottom-bar-social-link"><FaDiscord /></a>
                     <a href="" target="_blank" className="bottom-bar-social-link"><FaXTwitter /></a>
                     <a href="" target="_blank" className="bottom-bar-social-link"><SiGitbook /></a> */}
+                    <a href="https://www.avax.network/" target="_blank">
+                        <img
+                            src="/assets/PoweredbyAvalanche_BlackWhite 1.svg"
+                            alt="Powered by Avalanche"
+                            className="w-64 h-16"
+                        />
+                    </a>
                 </div>
             </div>
         </div>

@@ -17,7 +17,7 @@ import {
     rabbyWallet,
     braveWallet
 } from "@rainbow-me/rainbowkit/wallets";
-import { avalanche, avalancheFuji } from "wagmi/chains";
+import { avalanche } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
     createStorage,
@@ -42,7 +42,7 @@ export const noopStorage: BaseStorage = {
 export const storage =
     typeof window !== "undefined" && window.localStorage
         ? createStorage({
-            key: `tundra-43114`,
+            key: `avaxLegacyRouters-43114`,
             storage: window.localStorage,
         })
         : null;
@@ -79,12 +79,9 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
                     ],
                 },
             ],
-            chains: [avalanche, avalancheFuji],
+            chains: [avalanche],
             transports: {
                 [avalanche.id]: http("https://avalanche-c-chain-rpc.publicnode.com"),
-                [avalancheFuji.id]: http(
-                    "https://avalanche-fuji-c-chain-rpc.publicnode.com"
-                ),
             },
             storage,
         });

@@ -175,7 +175,7 @@ const TokenSearchChooser: FC<TokenSearchChooserProps> = ({
                 <Button
                     role="combobox"
                     aria-expanded={open}
-                    className="w-[200px] justify-between h-12 shadow-md py-8"
+                    className="w-[200px] justify-between h-12 shadow-md py-8 cursor-pointer"
                 >
                     <div className="flex flex-row gap-2 items-center base-semibold">
                         <div className="relative w-10 h-10 rounded-full overflow-hidden drop-shadow-gray-500 drop-shadow-xs mr-1">

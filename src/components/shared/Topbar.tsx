@@ -5,7 +5,14 @@ const Topbar = () => {
     return (
         <div className='topbar-container'>
             <div className='topbar'>
-                <NavLink to="/" className='logo'>Legacy Routers</NavLink>
+                <NavLink to="/" className='logo'>
+                    <div className='logo'>
+                        <div className="rounded-md bg-ava-red p-2 h-8 w-8">
+                            <img src="assets/Avalanche_Logomark_White.svg" />
+                        </div>
+                        <span>Legacy Routers</span>
+                    </div>
+                </NavLink>
                 <div className='topbar-links'>
                     <NavLink to="/LFJ" className='topbar-link'>LFJ</NavLink>
                     <NavLink to="/PHARAOH" className='topbar-link'>PHARAOH</NavLink>

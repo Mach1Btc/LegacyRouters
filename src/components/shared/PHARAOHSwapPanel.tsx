@@ -458,13 +458,16 @@ const PHARAOHSwapPanel = () => {
                                 />
                                 <TokenSearchChooser startSelected={fromToken} available={tokenList} onSelection={onFromTokenChange} onImport={handleTokenImport} />
                             </div>
-                            <div className="p-2 pt-0 text-xxs font-semibold hover:cursor-pointer">
-                                <p
-                                    onClick={() => {
-                                        setFromAmount(fromBalance);
-                                        setFromAmountInputValue(formatBN(fromBalance, fromToken.decimals));
-                                    }}
-                                    className='ml-2'>{`wallet: ${Number(formatBN(fromBalance, fromToken.decimals)).toLocaleString()}`}</p>
+                            <div className='flex flex-row w-full justify-between items-center'>
+                                <div className="p-2 pt-0 text-xxs font-semibold hover:cursor-pointer">
+                                    <p
+                                        onClick={() => {
+                                            setFromAmount(fromBalance);
+                                            setFromAmountInputValue(formatBN(fromBalance, fromToken.decimals));
+                                        }}
+                                        className='ml-2'>{`wallet: ${Number(formatBN(fromBalance, fromToken.decimals)).toLocaleString()}`}</p>
+                                </div>
+                                <div></div>
                             </div>
                             <div className='relative'>
                                 <Separator className='my-4 bg-isbjorn-blue seperator' />
@@ -485,8 +488,11 @@ const PHARAOHSwapPanel = () => {
                                 />
                                 <TokenSearchChooser startSelected={toToken} available={tokenList} onSelection={onToTokenChange} onImport={handleTokenImport} />
                             </div>
-                            <div className="p-2 pt-0 text-xxs font-semibold">
-                                <p className='ml-2'>{`wallet: ${Number(formatBN(toBalance, toToken.decimals)).toLocaleString()}`}</p>
+                            <div className='flex flex-row w-full justify-between items-center'>
+                                <div className="p-2 pt-0 text-xxs font-semibold">
+                                    <p className='ml-2'>{`wallet: ${Number(formatBN(toBalance, toToken.decimals)).toLocaleString()}`}</p>
+                                </div>
+                                <div></div>
                             </div>
                             <div className='w-full p-2 flex flex-row justify-between'>
                                 <div className='flex flex-row items-center'>
