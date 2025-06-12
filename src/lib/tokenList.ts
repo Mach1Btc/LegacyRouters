@@ -775,4 +775,265 @@ export const default_token_list: TokenList = {
     decimals: 18,
     rank: "",
   },
+  "0xc423ea985d96fd5cbe69f52bb624e267866072cd": {
+    address: "0xC423EA985D96FD5cBE69F52Bb624e267866072cD",
+    name: "Rest in Piss",
+    ticker: "RIP",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0xc423ea985d96fd5cbe69f52bb624e267866072cd/6862ef52d98efe647b0a01799344b0de.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0x8cae0a70a00f5b4ba6fe5f41c544bedb267b9040": {
+    address: "0x8caE0A70A00f5b4bA6Fe5F41c544bEdB267B9040",
+    name: "Its Just WrathTank",
+    ticker: "WRATH",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0x8cae0a70a00f5b4ba6fe5f41c544bedb267b9040/5f122a49b641c873464a5992bc10f10c.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0x54ef57c77f940c06b0ee4be3a3ce674c4217a64d": {
+    address: "0x54EF57c77f940c06B0EE4Be3A3ce674c4217A64D",
+    name: "Corruption DAO",
+    ticker: "CD",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0x54ef57c77f940c06b0ee4be3a3ce674c4217a64d/2b673e3c987d433f2951fb68304d5b97.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0x8d7d37b2198469cabeea47dd1902ec3659ca4ea1": {
+    address: "0x8d7d37b2198469CabeEA47dd1902ec3659cA4Ea1",
+    name: "Nobs saved Avax",
+    ticker: "NOBS",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0x8d7d37b2198469cabeea47dd1902ec3659ca4ea1/9ad085bb6bb8fb26502f023c031d9f89.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0xacc95afa65768aa74044e6f6e267ad6417cd3e55": {
+    address: "0xACC95Afa65768aa74044E6f6e267AD6417CD3e55",
+    name: "Boi the Bear",
+    ticker: "BOI",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0xacc95afa65768aa74044e6f6e267ad6417cd3e55/3b4576c89aa948e8c8d7819d144b331c.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0x0f669808d88b2b0b3d23214dcd2a1cc6a8b1b5cd": {
+    address: "0x0f669808d88B2b0b3D23214DCD2a1cc6A8B1B5cd",
+    name: "Blub",
+    ticker: "BLUB",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0x0f669808d88b2b0b3d23214dcd2a1cc6a8b1b5cd/9a8353f35285f162cdef1d88360bb89a.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0x91a1c5a6001e6aa628f49094658c65a19794d7f6": {
+    address: "0x91a1C5a6001e6Aa628f49094658C65A19794D7f6",
+    name: "PHARM",
+    ticker: "PHARM",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0x91a1c5a6001e6aa628f49094658c65a19794d7f6/38d91292c7c30adf8d4e7bca242569ba.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0x09d156f209e0c54d0365d6bb05f8a048649f2542": {
+    address: "0x09d156F209E0C54D0365D6BB05f8a048649f2542",
+    name: "AIVAX",
+    ticker: "AIVAX",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0x09d156f209e0c54d0365d6bb05f8a048649f2542/9d4756946267bbeff8d7ed6ff4d084b8.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0x1bfa7fd90de1285deb09a734112ab6bcd935fc6a": {
+    address: "0x1BfA7FD90dE1285deB09a734112AB6bCD935fC6a",
+    name: "H4SHFund",
+    ticker: "H4SH",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0x1bfa7fd90de1285deb09a734112ab6bcd935fc6a/701345dffc762595873c7b50286f7263.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0xb7ef323b0ad752d008b4236ef822148fafc0775d": {
+    address: "0xb7eF323B0aD752D008B4236EF822148FAFc0775d",
+    name: "Sidelined ",
+    ticker: "COPE",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0xb7ef323b0ad752d008b4236ef822148fafc0775d/f548aa4bcadb1c29390bb5909ccc8cda.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0x77776ab9495729e0939e9badaf7e7c3312777777": {
+    address: "0x77776aB9495729E0939E9bADAf7E7c3312777777",
+    name: "WABBIT",
+    ticker: "WABBIT",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0x77776ab9495729e0939e9badaf7e7c3312777777/feed20403a92485c4f4db0f3dba7c5a0.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0x41cbfd7c8709d1e459ce816703a1fc882daa77d3": {
+    address: "0x41CBfD7C8709d1E459CE816703a1Fc882DAa77D3",
+    name: "Loksmith",
+    ticker: "LOK",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0x41cbfd7c8709d1e459ce816703a1fc882daa77d3/d399255db0a53177edc5d3d02d8f5795.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0x7698a5311da174a95253ce86c21ca7272b9b05f8": {
+    address: "0x7698A5311DA174A95253Ce86C21ca7272b9B05f8",
+    name: "Wink",
+    ticker: "WINK",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0x7698a5311da174a95253ce86c21ca7272b9b05f8/5b1e5b7cf2f79653e8e0ac4effabeec3.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0xc654721fbf1f374fd9ffa3385bba2f4932a6af55": {
+    address: "0xC654721fBf1F374fd9FfA3385Bba2F4932A6af55",
+    name: "Juicy",
+    ticker: "JUICY",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0xc654721fbf1f374fd9ffa3385bba2f4932a6af55/e043fe32e5a1b5283543cc41a5f61b57.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0x40146e96ee5297187022d1ca62a3169b5e45b0a4": {
+    address: "0x40146E96EE5297187022D1ca62A3169B5e45B0a4",
+    name: "Dimish",
+    ticker: "DISH",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0x40146e96ee5297187022d1ca62a3169b5e45b0a4/9981ae92c46e9387f2ce988765aeef68.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0x5ddc8d968a94cf95cfeb7379f8372d858b9c797d": {
+    address: "0x5DDc8d968a94cf95CfeB7379F8372d858B9C797d",
+    name: "WOLFI",
+    ticker: "WOLFI",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0x5ddc8d968a94cf95cfeb7379f8372d858b9c797d/b950ab8ac319550b2b73a5a88b6927eb.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0xe2e38eeb9699f64afe77fc4e092c5c8b5d671d2f": {
+    address: "0xE2e38eEb9699f64afe77fc4E092c5C8B5D671D2f",
+    name: "Snowmon",
+    ticker: "SNOW",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0xe2e38eeb9699f64afe77fc4e092c5c8b5d671d2f/d770e804996e3be4359e1b5d69c0a515.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0x96f4a78c19a273d95fb082800911db66648b0670": {
+    address: "0x96f4A78c19a273D95fB082800911dB66648b0670",
+    name: "TEK",
+    ticker: "TEK",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0x96f4a78c19a273d95fb082800911db66648b0670/3f4d21d042ac29025a5737a32fb78e32.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0xec273f211e7f0165421bdf72f5b55995b9a91665": {
+    address: "0xec273F211e7f0165421BDf72F5B55995B9a91665",
+    name: "FrogNation",
+    ticker: "FRNA",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0xec273f211e7f0165421bdf72f5b55995b9a91665/80f99e6afada6480ab5e430f027ef714.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0xe29f8b925efef6e8b2c73bd468c559389c9f641d": {
+    address: "0xe29F8b925EFeF6E8B2c73bd468c559389C9f641D",
+    name: "AURAFART",
+    ticker: "AFART",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0xe29f8b925efef6e8b2c73bd468c559389c9f641d/0b08139f5f74dc3e9afe960d84c1477f.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0xf5a3442cb9dfce79369eeb34db961842d70fc84d": {
+    address: "0xF5a3442cB9dfcE79369EeB34db961842D70fC84D",
+    name: "BALLISTIC",
+    ticker: "BLST",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0xf5a3442cb9dfce79369eeb34db961842d70fc84d/0cc4026cffe609743d204262eb1534eb.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0x79d733d099f3666fdc5d8b022b71aff3601bafce": {
+    address: "0x79D733d099F3666fDC5D8B022b71AFf3601baFcE",
+    name: "SNIBSNIB",
+    ticker: "SNIB",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0x79d733d099f3666fdc5d8b022b71aff3601bafce/52f76e454a8a0346d71f06dc539e6e70.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0x3e8b37d57fe97bc9fe28ff50f85b23a77e245d07": {
+    address: "0x3e8B37d57FE97Bc9FE28ff50F85b23a77e245d07",
+    name: "Mullet Mode",
+    ticker: "MULLET",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0x3e8b37d57fe97bc9fe28ff50f85b23a77e245d07/cde80c31495ee73aa1f6c672bb00aa20.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0xac1fdbc389254cce45e8493348eeacc66f852609": {
+    address: "0xAc1FDBC389254cce45e8493348eEAcC66F852609",
+    name: "Wyoming",
+    ticker: "WY",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0xac1fdbc389254cce45e8493348eeacc66f852609/2bbed1632f133f332f5eb1862f0f065b.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0xff24003428fb2e969c39edee4e9f464b0b78313d": {
+    address: "0xFF24003428Fb2E969C39EdEe4e9F464b0b78313d",
+    name: "Waifu",
+    ticker: "WAIFU",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0xff24003428fb2e969c39edee4e9f464b0b78313d/d374b3da57fd4c646b81573c7930e1a1.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0xa813d175675c7f19bb7fd541f5ad1bcaf2117fe7": {
+    address: "0xa813d175675C7F19Bb7fD541F5AD1bcAF2117FE7",
+    name: "PEON",
+    ticker: "PEON",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0xa813d175675c7f19bb7fd541f5ad1bcaf2117fe7/6966b6357bc892dea64872bf286096bb.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0xd548e5220c3cad07a6becc32351643e3dec472db": {
+    address: "0xd548e5220c3cad07a6BeCc32351643e3DEC472DB",
+    name: "baldy baldy",
+    ticker: "BALDY",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0xd548e5220c3cad07a6becc32351643e3dec472db/200a0f1204b9fed58853b0770f393fe1.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0x2d0afed89a6d6a100273db377dba7a32c739e314": {
+    address: "0x2d0aFed89a6D6A100273Db377dBA7a32C739E314",
+    name: "BIG",
+    ticker: "BIG",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0x2d0afed89a6d6a100273db377dba7a32c739e314/b1cc0e4a27a14bd4ca1edb02e1741e1d.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0x00697f5f6dc2ca0a17e6c89bccd1173a61ea24a6": {
+    address: "0x00697F5F6dc2CA0A17e6c89bCcd1173A61eA24a6",
+    name: "Bensi Box Token",
+    ticker: "BENSI",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0x00697f5f6dc2ca0a17e6c89bccd1173a61ea24a6/c39ee73da69998e50f9517bd750b1fec.png",
+    decimals: 18,
+    rank: "",
+  },
 };

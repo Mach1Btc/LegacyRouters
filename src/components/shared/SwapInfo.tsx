@@ -35,6 +35,23 @@ const SwapInfo: React.FC<SwapInfoProps> = ({
                     <span className='pointer-events-none mr-7'>{pairType}</span>
                 </div>
             )}
+            {pairAddress !== undefined && <div className='flex flex-row justify-between info-links mt-2'>
+                <div></div>
+                <div className='flex flex-row gap-1'>
+                    <a href={"https://dexscreener.com/avalanche/" + pairAddress.toLowerCase()} target='_blank'>
+                        <img
+                            src="/assets/DexscreenerLogo.svg"
+                            className='h-5 w-5'
+                        />
+                    </a>
+                    <a href={"https://www.dextools.io/app/en/avalanche/pair-explorer/" + pairAddress.toLowerCase()} target='_blank' rel="noopener noreferrer">
+                        <img
+                            src="/assets/DextoolsLogo.svg"
+                            className='h-5 w-5'
+                        /></a>
+                </div>
+                <div></div>
+            </div>}
         </div>
     )
 }

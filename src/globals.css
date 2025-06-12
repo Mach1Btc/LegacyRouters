@@ -192,3 +192,7 @@ body {
 .no-select {
   @apply pointer-events-none select-none;
 }
+
+.info-links {
+  @apply !font-sans !text-black;
+}
