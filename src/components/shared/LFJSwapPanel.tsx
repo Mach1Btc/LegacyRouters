@@ -363,7 +363,9 @@ const LFJSwapPanel = () => {
                 }
             } else {
                 setToAmount(new BN(0));
-                return;
+                setToAmountInputValue('');
+                setAmountOutComputed(new BN(0));
+                setIsLoading(false);
             }
             setIsLoading(false);
         };
@@ -389,7 +391,9 @@ const LFJSwapPanel = () => {
                 }
             } else {
                 setFromAmount(new BN(0));
-                return;
+                setFromAmountInputValue('');
+                setAmountInComputed(new BN(0));
+                setIsLoading(false);
             }
             setIsLoading(false);
         };
@@ -531,10 +535,10 @@ const LFJSwapPanel = () => {
                             </div>
                             <div className='w-full p-2'>
                                 <Button
-                                    disabled={isLoading ||
+                                    disabled={isConnected && (isLoading ||
                                         (fromAmount.isZero() && toAmount.isZero()) ||
                                         (!isFromAmountExact && amountInComputed.gt(fromBalance)) ||
-                                        (isFromAmountExact && fromAmount.gt(fromBalance))
+                                        (isFromAmountExact && fromAmount.gt(fromBalance)))
                                     }
                                     className="lfj-swap-button"
                                     onClick={() => {

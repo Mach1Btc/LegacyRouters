@@ -519,7 +519,10 @@ const PHARAOHSwapPanel = () => {
                             </div>
                             <div className='w-full p-2'>
                                 <Button
-                                    disabled={isLoading || (fromAmount.isZero() && toAmount.isZero()) || (!isFromAmountExact && amountInComputed.gt(fromBalance)) || (isFromAmountExact && fromAmount.gt(fromBalance))}
+                                    disabled={isConnected && (isLoading ||
+                                        (fromAmount.isZero() && toAmount.isZero()) ||
+                                        (!isFromAmountExact && amountInComputed.gt(fromBalance)) ||
+                                        (isFromAmountExact && fromAmount.gt(fromBalance)))}
                                     className="pharaoh-swap-button"
                                     onClick={() => {
                                         if (isConnected) {

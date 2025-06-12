@@ -9,17 +9,17 @@ import { AddressCopyLink, Loader, SlippageInput, TokenSearchChooser } from '@/co
 import { Separator } from '@/components/ui/separator';
 import { Switch } from "@/components/ui/switch"
 import BN from 'bn.js';
-import { defaultSlippage, explorer_url, UNISWAP_V2_ROUTER_ADDRESS, safeModeEnabledMaxSlippage, sample_token_list, WAVAX_ADDRESS } from '@/lib/constants';
+import { defaultSlippage, explorer_url, PANGOLIN_ROUTER_ADDRESS, safeModeEnabledMaxSlippage, sample_token_list, WAVAX_ADDRESS } from '@/lib/constants';
 import { Token, TokenList } from '@/lib/types';
 import { formatBN, scaleToBN } from '@/lib/utils';
 import { useUserContext } from '@/context/AuthContext';
 import { approveERC20Amount, getERC20Allowance, importNewERC20Token } from '@/lib/ERC20';
 import { toast } from "sonner"
 import { WrapUtils } from '@/lib/WAVAX';
-import { createSwapTransaction, getAmountIn, getAmountOut, getPairAddressFor } from '@/lib/Uniswap';
+import { createSwapTransaction, getAmountIn, getAmountOut, getPairAddressFor } from '@/lib/Pangolin';
 
 
-const UniswapSwapPanel = () => {
+const PangolinSwapPanel = () => {
 
     const { account, isConnected, update, refresh } = useUserContext();
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -33,7 +33,7 @@ const UniswapSwapPanel = () => {
     const [fromTokenAllowance, setFromTokenAllowance] = useState<BN>(new BN(0));
     const [fromBalance, setFromTokenBalance] = useState<BN>(new BN(0));
 
-    const [toToken, setToToken] = useState<Token>(tokenList["0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E"]);
+    const [toToken, setToToken] = useState<Token>(tokenList["0x152b9d0FdC40C096757F570A51E494bd4b943E50"]);
     const [lastToToken, setLastToToken] = useState<Token>(toToken);
     const [toAmount, setToAmount] = useState<BN>(new BN(0));
     const [toAmountInputValue, setToAmountInputValue] = useState<string>('');
@@ -208,7 +208,7 @@ const UniswapSwapPanel = () => {
     // Helper function for token approval
     const approveTokens = async (requiredAllowance: any): Promise<void> => {
         const result = await approveERC20Amount(
-            UNISWAP_V2_ROUTER_ADDRESS,
+            PANGOLIN_ROUTER_ADDRESS,
             fromToken.address,
             requiredAllowance
         );
@@ -410,7 +410,7 @@ const UniswapSwapPanel = () => {
             const needsAllowanceCheck = fromAmount.gt(new BN(0)) || amountInComputed.gt(new BN(0));
 
             if (WrapUtils.needsAllowance(fromToken.address) && needsAllowanceCheck) {
-                const allowance = await getERC20Allowance(account.address, UNISWAP_V2_ROUTER_ADDRESS, fromToken.address);
+                const allowance = await getERC20Allowance(account.address, PANGOLIN_ROUTER_ADDRESS, fromToken.address);
                 if (allowance !== null) {
                     setFromTokenAllowance(allowance);
                 }
@@ -447,6 +447,7 @@ const UniswapSwapPanel = () => {
 
     useEffect(() => {
         if (WrapUtils.isWrapOperation(fromToken, toToken)) {
+            // Wrap/unwrap operations don't need pair checking
             setCurrentPairExists(true);
             setCurrentPairAddress(WAVAX_ADDRESS);
         } else {
@@ -539,7 +540,7 @@ const UniswapSwapPanel = () => {
                                         (!isFromAmountExact && amountInComputed.gt(fromBalance)) ||
                                         (isFromAmountExact && fromAmount.gt(fromBalance)))
                                     }
-                                    className="uniswap-swap-button"
+                                    className="pangolin-swap-button"
                                     onClick={() => {
                                         if (isConnected) {
                                             handleSwapButtonClick();
@@ -553,7 +554,7 @@ const UniswapSwapPanel = () => {
                                 <div className="flex flex-col w-full mt-4 font-mono">
                                     <div className='flex flex-row justify-between text-xs text-gray-600'>
                                         <span className='pointer-events-none select-none'>Router:</span>
-                                        <AddressCopyLink address={UNISWAP_V2_ROUTER_ADDRESS} copyButton={true} externalLink={true} />
+                                        <AddressCopyLink address={PANGOLIN_ROUTER_ADDRESS} copyButton={true} externalLink={true} />
                                     </div>
                                     <div className='flex flex-row justify-between text-xs text-gray-600'>
                                         <span className='pointer-events-none select-none'>Pair:</span>
@@ -565,6 +566,7 @@ const UniswapSwapPanel = () => {
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </CardContent>
                 </Card>
@@ -574,4 +576,4 @@ const UniswapSwapPanel = () => {
     )
 }
 
-export default UniswapSwapPanel
+export default PangolinSwapPanel;

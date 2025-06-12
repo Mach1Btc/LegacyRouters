@@ -3,6 +3,7 @@ export { default as Bottombar } from "./Bottombar";
 export { default as ConnectButton } from "./ConnectButton";
 export { default as Loader } from "./Loader";
 export { default as LFJSwapPanel } from "./LFJSwapPanel";
+export { default as PangolinSwapPanel } from "./PangolinSwapPanel";
 export { default as PHARAOHSwapPanel } from "./PHARAOHSwapPanel";
 export { default as ThemeToggle } from "./ThemeToggle";
 export { default as TokenSearchChooser } from "./TokenSearchChooser";

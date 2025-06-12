@@ -30,8 +30,13 @@
   --color-pharaoh-red: rgb(185, 58, 44);
   --color-pharaoh-red-hover: rgb(206, 117, 107);
 
+  --color-pangolin-yellow: rgb(245, 204, 40);
+  --color-pangolin-yellow-hover: rgb(248, 219, 105);
+  --color-pangolin-gray: rgb(28, 28, 28);
+
   --color-uniswap-pink: rgb(234, 73, 197);
   --color-uniswap-pink-hover: rgb(240, 128, 214);
+  --color-uniswap-purple: rgb(46, 29, 49);
 
   --text-xxs: 0.625rem;
   --text-xxs--line-height: calc(1 / 0.625);
@@ -151,6 +156,10 @@ body {
 
 .pharaoh-swap-button {
   @apply bg-pharaoh-red hover:bg-pharaoh-red-hover text-white flex gap-2 w-full items-center cursor-pointer;
+}
+
+.pangolin-swap-button {
+  @apply bg-pangolin-yellow hover:bg-pangolin-yellow-hover text-white flex gap-2 w-full items-center cursor-pointer;
 }
 
 .uniswap-swap-button {
