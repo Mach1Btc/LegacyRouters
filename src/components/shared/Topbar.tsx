@@ -16,6 +16,7 @@ const Topbar = () => {
                 <div className='topbar-links'>
                     <NavLink to="/LFJ" className='topbar-link'>LFJ</NavLink>
                     <NavLink to="/PHARAOH" className='topbar-link'>PHARAOH</NavLink>
+                    <NavLink to="/Arena" className='topbar-link'>Arena</NavLink>
                     <NavLink to="/Pangolin" className='topbar-link'>Pangolin</NavLink>
                     <NavLink to="/Uniswap" className='topbar-link'>Uniswap</NavLink>
                 </div>

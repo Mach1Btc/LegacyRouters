@@ -8,6 +8,6 @@ const Uniswap = () => {
             </div>
         </div>
     )
-}
+};
 
-export default Uniswap
+export default Uniswap;

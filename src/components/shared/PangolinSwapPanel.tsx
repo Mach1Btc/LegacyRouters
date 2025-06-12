@@ -9,8 +9,8 @@ import { AddressCopyLink, Loader, SlippageInput, TokenSearchChooser } from '@/co
 import { Separator } from '@/components/ui/separator';
 import { Switch } from "@/components/ui/switch"
 import BN from 'bn.js';
-import { defaultSlippage, explorer_url, PANGOLIN_ROUTER_ADDRESS, safeModeEnabledMaxSlippage, sample_token_list, WAVAX_ADDRESS } from '@/lib/constants';
-import { Token, TokenList } from '@/lib/types';
+import { defaultSlippage, explorer_url, PANGOLIN_ROUTER_ADDRESS, safeModeEnabledMaxSlippage, WAVAX_ADDRESS } from '@/lib/constants';
+import { Token } from '@/lib/types';
 import { formatBN, scaleToBN } from '@/lib/utils';
 import { useUserContext } from '@/context/AuthContext';
 import { approveERC20Amount, getERC20Allowance, importNewERC20Token } from '@/lib/ERC20';
@@ -21,9 +21,8 @@ import { createSwapTransaction, getAmountIn, getAmountOut, getPairAddressFor } f
 
 const PangolinSwapPanel = () => {
 
-    const { account, isConnected, update, refresh } = useUserContext();
+    const { account, isConnected, tokenList, update, refresh } = useUserContext();
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [tokenList,] = useState<TokenList>(sample_token_list);
     const { openConnectModal } = useConnectModal();
 
     const [fromToken, setFromToken] = useState<Token>(tokenList["0xAVAX"]);

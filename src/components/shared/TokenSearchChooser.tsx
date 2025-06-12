@@ -78,6 +78,12 @@ const TokenSearchChooser: FC<TokenSearchChooserProps> = ({
         setImportError('');
     }, [searchValue]);
 
+    // Clear search when popover closes
+    useEffect(() => {
+        if (!open) {
+            setSearchValue('');
+        }
+    }, [open]);
 
     // Combine available and imported tokens
     const allTokens = { ...available, ...importedTokens };
@@ -165,6 +171,7 @@ const TokenSearchChooser: FC<TokenSearchChooserProps> = ({
                 onSelection(selectedToken);
             }
         }
+        setSearchValue(''); // Clear search after selection
     };
 
     if (!mounted) return null;
@@ -190,12 +197,14 @@ const TokenSearchChooser: FC<TokenSearchChooserProps> = ({
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-[240px] p-0 token-selector-content" align="start">
+            <PopoverContent className="w-[150px] sm:w-[200px] p-0 token-selector-content border-0" align="start">
                 {mounted && (
                     <Command shouldFilter={false} loop={true}>
                         <CommandInput
                             placeholder="Search token..."
+                            value={searchValue}
                             onValueChange={setSearchValue}
+                            className='border-gray-400'
                         />
                         <CommandList>
                             <CommandEmpty>

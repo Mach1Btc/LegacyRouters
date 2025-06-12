@@ -1,4 +1,5 @@
 export { default as AddressCopyLink } from "./AddressCopyLink";
+export { default as ArenaSwapPanel } from "./ArenaSwapPanel";
 export { default as Bottombar } from "./Bottombar";
 export { default as ConnectButton } from "./ConnectButton";
 export { default as Loader } from "./Loader";

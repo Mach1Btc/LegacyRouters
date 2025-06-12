@@ -8,6 +8,6 @@ const PHARAOH = () => {
             </div>
         </div>
     )
-}
+};
 
-export default PHARAOH
+export default PHARAOH;

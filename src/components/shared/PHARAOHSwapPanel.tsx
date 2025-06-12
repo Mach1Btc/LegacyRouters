@@ -9,8 +9,8 @@ import { Loader, SlippageInput, TokenSearchChooser, AddressCopyLink } from '@/co
 import { Separator } from '@/components/ui/separator';
 import { Switch } from "@/components/ui/switch";
 import BN from 'bn.js';
-import { defaultSlippage, explorer_url, PHARAOH_ROUTER_ADDRESS, safeModeEnabledMaxSlippage, sample_token_list, WAVAX_ADDRESS } from '@/lib/constants';
-import { Token, TokenList } from '@/lib/types';
+import { defaultSlippage, explorer_url, PHARAOH_ROUTER_ADDRESS, safeModeEnabledMaxSlippage, WAVAX_ADDRESS } from '@/lib/constants';
+import { Token } from '@/lib/types';
 import { formatBN, scaleToBN } from '@/lib/utils';
 import { useUserContext } from '@/context/AuthContext';
 import { approveERC20Amount, getERC20Allowance, importNewERC20Token } from '@/lib/ERC20';
@@ -21,11 +21,9 @@ import { getAmountOut, createSwapTransaction, getPairAddressFor } from '@/lib/PH
 
 const PHARAOHSwapPanel = () => {
 
-    const { account, isConnected, update, refresh } = useUserContext();
+    const { account, isConnected, tokenList, update, refresh } = useUserContext();
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
-
-    const [tokenList,] = useState<TokenList>(sample_token_list);
 
     const { openConnectModal } = useConnectModal();
 
@@ -445,7 +443,7 @@ const PHARAOHSwapPanel = () => {
         <div className='flex flex-col gap-1 items-center justify-start'>
             <div>
                 <Card className='card swap-card'>
-                    <CardContent className='p-4'>
+                    <CardContent className='p-4 pb-0'>
                         <div className='flex-1 flex flex-col px-3'>
                             <div className='flex-1 flex flex-row p-2 pb-0 items-center'>
                                 <Input

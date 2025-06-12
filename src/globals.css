@@ -38,6 +38,9 @@
   --color-uniswap-pink-hover: rgb(240, 128, 214);
   --color-uniswap-purple: rgb(46, 29, 49);
 
+  --color-arena-orange: rgb(235, 84, 10);
+  --color-arena-orange-hover: rgb(241, 135, 84);
+
   --text-xxs: 0.625rem;
   --text-xxs--line-height: calc(1 / 0.625);
   --text-xxxs: 0.5rem;
@@ -127,7 +130,7 @@ body {
 }
 
 .token-selector-content {
-  @apply bg-white border-secondary-blue;
+  @apply bg-white;
   opacity: 1;
   z-index: 1000;
 }
@@ -172,6 +175,10 @@ body {
 
 .uniswap-swap-button {
   @apply bg-uniswap-pink hover:bg-uniswap-pink-hover text-white flex gap-2 w-full items-center cursor-pointer;
+}
+
+.arena-swap-button {
+  @apply bg-arena-orange hover:bg-arena-orange-hover text-white flex gap-2 w-full items-center cursor-pointer;
 }
 
 .swap-card {

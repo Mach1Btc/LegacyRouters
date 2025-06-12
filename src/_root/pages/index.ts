@@ -1,3 +1,4 @@
+export { default as Arena } from "./Arena";
 export { default as Home } from "./Home";
 export { default as NotFound } from "./NotFound";
 export { default as LFJ } from "./LFJ";

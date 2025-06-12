@@ -4,7 +4,7 @@ import { useAccount } from "wagmi";
 import { web3Config } from "@/context/Web3Context";
 import { Account, TokenList } from "@/lib/types";
 import BN from "bn.js";
-import { sample_token_list } from "@/lib/constants";
+import { default_token_list } from "@/lib/tokenList";
 import { getERC20Balance } from "@/lib/ERC20";
 
 
@@ -44,7 +44,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // const [isLoading, setIsLoading] = useState(false);
     const [account, setAccount] = useState<Account>(INITIAL_ACCOUNT);
     const [isConnected, setIsConnected] = useState(connected);
-    const [tokenList,] = useState<TokenList>(sample_token_list);
+    const [tokenList,] = useState<TokenList>(default_token_list);
     const [refresh, setRefresh] = useState(0);
 
     const update = () => {

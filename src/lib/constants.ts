@@ -1,5 +1,3 @@
-import { TokenList } from "./types";
-
 export const explorer_url = "https://snowscan.xyz";
 
 export const defaultSlippage = 1;
@@ -9,63 +7,6 @@ export const safeModeEnabledMaxSlippage = 5;
 export const safeModeDisabledMaxSlippage = 99.99;
 
 export const minSlippage = 0.01;
-
-export const sample_token_list: TokenList = {
-  "0xAVAX": {
-    address: "0xAVAX",
-    name: "AVAX",
-    ticker: "AVAX",
-    imgUrl:
-      "https://lfj.gg/static/media/avalanche.7c81486190237e87e238c029fd746008.svg",
-    decimals: 18,
-    rank: "1",
-  },
-  "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7": {
-    address: "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
-    name: "Wrapped AVAX",
-    ticker: "WAVAX",
-    imgUrl:
-      "https://static.debank.com/image/avax_token/logo_url/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/753d82f0137617110f8dec56309b4065.png",
-    decimals: 18,
-    rank: "1",
-  },
-  "0xc970D70234895dD6033f984Fd00909623C666e66": {
-    address: "0xc970D70234895dD6033f984Fd00909623C666e66",
-    name: "Quasi",
-    ticker: "QUASI",
-    imgUrl:
-      "https://static.debank.com/image/avax_token/logo_url/0xc970d70234895dd6033f984fd00909623c666e66/2f944911078af60e4dd571995986ba1c.png",
-    decimals: 18,
-    rank: "2",
-  },
-  "0x152b9d0FdC40C096757F570A51E494bd4b943E50": {
-    address: "0x152b9d0FdC40C096757F570A51E494bd4b943E50",
-    name: "Avalanche Bridged Bitcoin",
-    ticker: "BTC.b",
-    imgUrl:
-      "https://static.debank.com/image/avax_token/logo_url/0x152b9d0fdc40c096757f570a51e494bd4b943e50/2411fb147c1cc4328edff5d204f09f80.png",
-    decimals: 8,
-    rank: "3",
-  },
-  "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E": {
-    address: "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
-    name: "USD Coin",
-    ticker: "USDC",
-    imgUrl:
-      "https://static.debank.com/image/coin/logo_url/usdc/e87790bfe0b3f2ea855dc29069b38818.png",
-    decimals: 6,
-    rank: "4",
-  },
-  "0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7": {
-    address: "0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7",
-    name: "TetherToken",
-    ticker: "USDT",
-    imgUrl:
-      "https://static.debank.com/image/coin/logo_url/usdt/23af7472292cb41dc39b3f1146ead0fe.png",
-    decimals: 6,
-    rank: "5",
-  },
-};
 
 export const ERC20_ABI = [
   { inputs: [], stateMutability: "nonpayable", type: "constructor" },
@@ -5714,6 +5655,1659 @@ export const UNISWAP_V2_PAIR_ABI = [
       },
     ],
     payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+];
+
+// ARENA TRADE CONTRACTS
+export const ARENA_TRADE_ROUTER_ADDRESS =
+  "0xF56D524D651B90E4B84dc2FffD83079698b9066E";
+
+export const ARENA_TRADE_ROUTER_ABI = [
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_factory",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_WAVAX",
+        type: "address",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "constructor",
+  },
+  {
+    inputs: [],
+    name: "WAVAX",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "tokenA",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "tokenB",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amountADesired",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountBDesired",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountAMin",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountBMin",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "deadline",
+        type: "uint256",
+      },
+    ],
+    name: "addLiquidity",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "amountA",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountB",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "liquidity",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amountTokenDesired",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountTokenMin",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountAVAXMin",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "deadline",
+        type: "uint256",
+      },
+    ],
+    name: "addLiquidityAVAX",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "amountToken",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountAVAX",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "liquidity",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "factory",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "amountOut",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "reserveIn",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "reserveOut",
+        type: "uint256",
+      },
+    ],
+    name: "getAmountIn",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "amountIn",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "pure",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "amountIn",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "reserveIn",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "reserveOut",
+        type: "uint256",
+      },
+    ],
+    name: "getAmountOut",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "amountOut",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "pure",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "amountOut",
+        type: "uint256",
+      },
+      {
+        internalType: "address[]",
+        name: "path",
+        type: "address[]",
+      },
+    ],
+    name: "getAmountsIn",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "amounts",
+        type: "uint256[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "amountIn",
+        type: "uint256",
+      },
+      {
+        internalType: "address[]",
+        name: "path",
+        type: "address[]",
+      },
+    ],
+    name: "getAmountsOut",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "amounts",
+        type: "uint256[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "amountA",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "reserveA",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "reserveB",
+        type: "uint256",
+      },
+    ],
+    name: "quote",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "amountB",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "pure",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "tokenA",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "tokenB",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "liquidity",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountAMin",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountBMin",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "deadline",
+        type: "uint256",
+      },
+    ],
+    name: "removeLiquidity",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "amountA",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountB",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "liquidity",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountTokenMin",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountAVAXMin",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "deadline",
+        type: "uint256",
+      },
+    ],
+    name: "removeLiquidityAVAX",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "amountToken",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountAVAX",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "liquidity",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountTokenMin",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountAVAXMin",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "deadline",
+        type: "uint256",
+      },
+    ],
+    name: "removeLiquidityAVAXSupportingFeeOnTransferTokens",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "amountAVAX",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "liquidity",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountTokenMin",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountAVAXMin",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "deadline",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "approveMax",
+        type: "bool",
+      },
+      {
+        internalType: "uint8",
+        name: "v",
+        type: "uint8",
+      },
+      {
+        internalType: "bytes32",
+        name: "r",
+        type: "bytes32",
+      },
+      {
+        internalType: "bytes32",
+        name: "s",
+        type: "bytes32",
+      },
+    ],
+    name: "removeLiquidityAVAXWithPermit",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "amountToken",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountAVAX",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "liquidity",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountTokenMin",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountAVAXMin",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "deadline",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "approveMax",
+        type: "bool",
+      },
+      {
+        internalType: "uint8",
+        name: "v",
+        type: "uint8",
+      },
+      {
+        internalType: "bytes32",
+        name: "r",
+        type: "bytes32",
+      },
+      {
+        internalType: "bytes32",
+        name: "s",
+        type: "bytes32",
+      },
+    ],
+    name: "removeLiquidityAVAXWithPermitSupportingFeeOnTransferTokens",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "amountAVAX",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "tokenA",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "tokenB",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "liquidity",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountAMin",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountBMin",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "deadline",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "approveMax",
+        type: "bool",
+      },
+      {
+        internalType: "uint8",
+        name: "v",
+        type: "uint8",
+      },
+      {
+        internalType: "bytes32",
+        name: "r",
+        type: "bytes32",
+      },
+      {
+        internalType: "bytes32",
+        name: "s",
+        type: "bytes32",
+      },
+    ],
+    name: "removeLiquidityWithPermit",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "amountA",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountB",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "amountOut",
+        type: "uint256",
+      },
+      {
+        internalType: "address[]",
+        name: "path",
+        type: "address[]",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "deadline",
+        type: "uint256",
+      },
+    ],
+    name: "swapAVAXForExactTokens",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "amounts",
+        type: "uint256[]",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "amountOutMin",
+        type: "uint256",
+      },
+      {
+        internalType: "address[]",
+        name: "path",
+        type: "address[]",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "deadline",
+        type: "uint256",
+      },
+    ],
+    name: "swapExactAVAXForTokens",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "amounts",
+        type: "uint256[]",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "amountOutMin",
+        type: "uint256",
+      },
+      {
+        internalType: "address[]",
+        name: "path",
+        type: "address[]",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "deadline",
+        type: "uint256",
+      },
+    ],
+    name: "swapExactAVAXForTokensSupportingFeeOnTransferTokens",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "amountIn",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountOutMin",
+        type: "uint256",
+      },
+      {
+        internalType: "address[]",
+        name: "path",
+        type: "address[]",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "deadline",
+        type: "uint256",
+      },
+    ],
+    name: "swapExactTokensForAVAX",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "amounts",
+        type: "uint256[]",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "amountIn",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountOutMin",
+        type: "uint256",
+      },
+      {
+        internalType: "address[]",
+        name: "path",
+        type: "address[]",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "deadline",
+        type: "uint256",
+      },
+    ],
+    name: "swapExactTokensForAVAXSupportingFeeOnTransferTokens",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "amountIn",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountOutMin",
+        type: "uint256",
+      },
+      {
+        internalType: "address[]",
+        name: "path",
+        type: "address[]",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "deadline",
+        type: "uint256",
+      },
+    ],
+    name: "swapExactTokensForTokens",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "amounts",
+        type: "uint256[]",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "amountIn",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountOutMin",
+        type: "uint256",
+      },
+      {
+        internalType: "address[]",
+        name: "path",
+        type: "address[]",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "deadline",
+        type: "uint256",
+      },
+    ],
+    name: "swapExactTokensForTokensSupportingFeeOnTransferTokens",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "amountOut",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountInMax",
+        type: "uint256",
+      },
+      {
+        internalType: "address[]",
+        name: "path",
+        type: "address[]",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "deadline",
+        type: "uint256",
+      },
+    ],
+    name: "swapTokensForExactAVAX",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "amounts",
+        type: "uint256[]",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "amountOut",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountInMax",
+        type: "uint256",
+      },
+      {
+        internalType: "address[]",
+        name: "path",
+        type: "address[]",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "deadline",
+        type: "uint256",
+      },
+    ],
+    name: "swapTokensForExactTokens",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "amounts",
+        type: "uint256[]",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    stateMutability: "payable",
+    type: "receive",
+  },
+];
+
+export const ARENA_TRADE_FACTORY_ADDRESS =
+  "0xF16784dcAf838a3e16bEF7711a62D12413c39BD1";
+
+export const ARENA_TRADE_FACTORY_ABI = [
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_feeToSetter",
+        type: "address",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "constructor",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "token0",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "token1",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "pair",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "PairCreated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "feeReceiverAddress",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint96",
+        name: "feePercentageInBps",
+        type: "uint96",
+      },
+      {
+        indexed: false,
+        internalType: "uint96",
+        name: "previousFeePercentageInBps",
+        type: "uint96",
+      },
+    ],
+    name: "ProtocolFeeInfoSet",
+    type: "event",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "allPairs",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "allPairsLength",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "tokenA",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "tokenB",
+        type: "address",
+      },
+    ],
+    name: "createPair",
+    outputs: [
+      {
+        internalType: "address",
+        name: "pair",
+        type: "address",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "feeTo",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "feeToSetter",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "getPair",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getProtocolFeeInfo",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+      {
+        internalType: "uint96",
+        name: "",
+        type: "uint96",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "migrator",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "pairCodeHash",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32",
+      },
+    ],
+    stateMutability: "pure",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "protocolFeeInfo",
+    outputs: [
+      {
+        internalType: "address",
+        name: "protocolFeeReceiverAddress",
+        type: "address",
+      },
+      {
+        internalType: "uint96",
+        name: "protocolFeePercentageInBps",
+        type: "uint96",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_feeTo",
+        type: "address",
+      },
+    ],
+    name: "setFeeTo",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_feeToSetter",
+        type: "address",
+      },
+    ],
+    name: "setFeeToSetter",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_migrator",
+        type: "address",
+      },
+    ],
+    name: "setMigrator",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_feeReceiverAddress",
+        type: "address",
+      },
+      {
+        internalType: "uint96",
+        name: "_feePercentageInBps",
+        type: "uint96",
+      },
+    ],
+    name: "setProtocolFeeInfo",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+];
+
+export const ARENA_TRADE_PAIR_ABI = [
+  { inputs: [], stateMutability: "nonpayable", type: "constructor" },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "owner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "spender",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "value",
+        type: "uint256",
+      },
+    ],
+    name: "Approval",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "sender",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount0",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount1",
+        type: "uint256",
+      },
+      { indexed: true, internalType: "address", name: "to", type: "address" },
+    ],
+    name: "Burn",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "sender",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount0",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount1",
+        type: "uint256",
+      },
+    ],
+    name: "Mint",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "sender",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount0In",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount1In",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount0Out",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount1Out",
+        type: "uint256",
+      },
+      { indexed: true, internalType: "address", name: "to", type: "address" },
+    ],
+    name: "Swap",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint112",
+        name: "reserve0",
+        type: "uint112",
+      },
+      {
+        indexed: false,
+        internalType: "uint112",
+        name: "reserve1",
+        type: "uint112",
+      },
+    ],
+    name: "Sync",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: true, internalType: "address", name: "from", type: "address" },
+      { indexed: true, internalType: "address", name: "to", type: "address" },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "value",
+        type: "uint256",
+      },
+    ],
+    name: "Transfer",
+    type: "event",
+  },
+  {
+    inputs: [],
+    name: "DOMAIN_SEPARATOR",
+    outputs: [{ internalType: "bytes32", name: "", type: "bytes32" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "MINIMUM_LIQUIDITY",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "PERMIT_TYPEHASH",
+    outputs: [{ internalType: "bytes32", name: "", type: "bytes32" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "address", name: "", type: "address" },
+      { internalType: "address", name: "", type: "address" },
+    ],
+    name: "allowance",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "address", name: "spender", type: "address" },
+      { internalType: "uint256", name: "value", type: "uint256" },
+    ],
+    name: "approve",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "", type: "address" }],
+    name: "balanceOf",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "to", type: "address" }],
+    name: "burn",
+    outputs: [
+      { internalType: "uint256", name: "amount0", type: "uint256" },
+      { internalType: "uint256", name: "amount1", type: "uint256" },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "decimals",
+    outputs: [{ internalType: "uint8", name: "", type: "uint8" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "factory",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getReserves",
+    outputs: [
+      { internalType: "uint112", name: "_reserve0", type: "uint112" },
+      { internalType: "uint112", name: "_reserve1", type: "uint112" },
+      { internalType: "uint32", name: "_blockTimestampLast", type: "uint32" },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "address", name: "_token0", type: "address" },
+      { internalType: "address", name: "_token1", type: "address" },
+    ],
+    name: "initialize",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "kLast",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "to", type: "address" }],
+    name: "mint",
+    outputs: [{ internalType: "uint256", name: "liquidity", type: "uint256" }],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "name",
+    outputs: [{ internalType: "string", name: "", type: "string" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "", type: "address" }],
+    name: "nonces",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "address", name: "owner", type: "address" },
+      { internalType: "address", name: "spender", type: "address" },
+      { internalType: "uint256", name: "value", type: "uint256" },
+      { internalType: "uint256", name: "deadline", type: "uint256" },
+      { internalType: "uint8", name: "v", type: "uint8" },
+      { internalType: "bytes32", name: "r", type: "bytes32" },
+      { internalType: "bytes32", name: "s", type: "bytes32" },
+    ],
+    name: "permit",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "price0CumulativeLast",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "price1CumulativeLast",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "to", type: "address" }],
+    name: "skim",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "uint256", name: "amount0Out", type: "uint256" },
+      { internalType: "uint256", name: "amount1Out", type: "uint256" },
+      { internalType: "address", name: "to", type: "address" },
+      { internalType: "bytes", name: "data", type: "bytes" },
+    ],
+    name: "swap",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "symbol",
+    outputs: [{ internalType: "string", name: "", type: "string" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "sync",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "token0",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "token1",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "totalSupply",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "address", name: "to", type: "address" },
+      { internalType: "uint256", name: "value", type: "uint256" },
+    ],
+    name: "transfer",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "address", name: "from", type: "address" },
+      { internalType: "address", name: "to", type: "address" },
+      { internalType: "uint256", name: "value", type: "uint256" },
+    ],
+    name: "transferFrom",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
     stateMutability: "nonpayable",
     type: "function",
   },

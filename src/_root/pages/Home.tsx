@@ -15,7 +15,7 @@ const Home = () => {
                         className="w-96 h-48 object-contain p-1 group-hover:brightness-110 transition-all duration-300 relative z-10 bg-lfj-purple"
                     />
                     {/* Background overlay */}
-                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition-opacity duration-300 z-20"></div>
+                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-35 transition-opacity duration-300 z-20"></div>
                     {/* Text overlay - separate from background */}
                     <div className="absolute inset-0 flex items-center justify-center z-30">
                         <span className="text-white font-bold text-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -44,7 +44,27 @@ const Home = () => {
                     </div>
                 </Link>
 
-                {/* Uniswap Button */}
+                {/* Arena Button */}
+                <Link
+                    to="/Arena"
+                    className="group relative overflow-hidden rounded-lg shadow-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                >
+                    <img
+                        src="/assets/ArenaLogo.svg"
+                        alt="Use Arena.Trade v1"
+                        className="w-96 h-48 object-contain p-4 group-hover:brightness-110 transition-all duration-300 relative z-10 bg-arena-orange"
+                    />
+                    {/* Background overlay */}
+                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-35 transition-opacity duration-300 z-20"></div>
+                    {/* Text overlay - separate from background */}
+                    <div className="absolute inset-0 flex items-center justify-center z-30">
+                        <span className="text-white font-bold text-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            Use Arena.Trade v1
+                        </span>
+                    </div>
+                </Link>
+
+                {/* Pangolin Button */}
                 <Link
                     to="/Pangolin"
                     className="group relative overflow-hidden rounded-lg shadow-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
@@ -86,6 +106,6 @@ const Home = () => {
             </div>
         </div>
     )
-}
+};
 
 export default Home;

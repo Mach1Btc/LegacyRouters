@@ -8,6 +8,6 @@ const LFJ = () => {
             </div>
         </div>
     )
-}
+};
 
-export default LFJ
+export default LFJ;
