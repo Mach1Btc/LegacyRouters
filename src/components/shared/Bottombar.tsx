@@ -10,9 +10,10 @@ const Bottombar = () => {
                         <div className="rounded-md bg-ava-red p-2 h-8 w-8">
                             <img src="assets/Avalanche_Logomark_White.svg" />
                         </div>
-                        <span>Legacy Routers</span>
+                        <span className="hidden sm:flex">Legacy Routers</span>
+                        <span className="flex sm:hidden">LR</span>
                     </div>
-                    <span>&copy; 2025 Legacy Routers</span>
+                    <span className="hidden sm:flex text-xxs md:text-xs lg:text-base" >&copy; 2025 Legacy Routers</span>
                 </div>
 
                 <div className="flex flex-row gap-8 text-xl">

@@ -8,7 +8,7 @@ const Topbar = () => {
                 <NavLink to="/" className='logo'>
                     <div className='logo'>
                         <div className="rounded-md bg-ava-red p-2 h-8 w-8">
-                            <img src="assets/Avalanche_Logomark_White.svg" />
+                            <img src="assets/Avalanche_Logomark_White.svg" className='' />
                         </div>
                         <span>Legacy Routers</span>
                     </div>
