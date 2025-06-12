@@ -175,7 +175,7 @@ body {
 }
 
 .swap-card {
-  @apply w-[360px] sm:w-[540px] shadow-2xl mb-20;
+  @apply w-[360px] sm:w-[540px] shadow-2xl mb-30 mt-10;
 }
 
 .info-text {
