@@ -676,4 +676,103 @@ export const default_token_list: TokenList = {
     decimals: 18,
     rank: "",
   },
+  "0x6f43ff77a9c0cf552b5b653268fbfe26a052429b": {
+    address: "0x6f43ff77a9c0cf552b5b653268fbfe26a052429b",
+    name: "LAMBO",
+    ticker: "LAMBO",
+    imgUrl:
+      "https://static.starsarena.com/uploads/5682c771-1dce-bda5-9da7-1947b459d4d01749334752886.jpeg",
+    decimals: 18,
+    rank: "",
+  },
+  "0x34a528da3b2ea5c6ad1796eba756445d1299a577": {
+    address: "0x34a528da3b2ea5c6ad1796eba756445d1299a577",
+    name: "Integrity DAO",
+    ticker: "ID",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0x34a528da3b2ea5c6ad1796eba756445d1299a577/ad6e5e088a6602820f285daf839c3619.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0xffff003a6bad9b743d658048742935fffe2b6ed7": {
+    address: "0xFFFF003a6BAD9b743d658048742935fFFE2b6ED7",
+    name: "yellow ket",
+    ticker: "KET",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0xffff003a6bad9b743d658048742935fffe2b6ed7/9eaad76959bc4cead625e12e7136e6bd.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0x8cf71b4f445a47f234a0dc61034708a4087bead0": {
+    address: "0x8cF71B4f445A47f234A0Dc61034708A4087bead0",
+    name: "Emini Spaghettini",
+    ticker: "EMINI",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0x8cf71b4f445a47f234a0dc61034708a4087bead0/f0c0837e03443e432bf5a023b76d94b1.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0x39e58c9b8a539e007b4457a5dd1107b1434d278b": {
+    address: "0x39e58C9B8A539E007B4457A5Dd1107b1434d278B",
+    name: "BABY JUBJUB",
+    ticker: "BJUB",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0x39e58c9b8a539e007b4457a5dd1107b1434d278b/f5283452d7b88238249c6a5acc9f42c6.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0xb9c188bc558a82a1ee9e75ae0857df443f407632": {
+    address: "0xB9C188BC558a82a1eE9E75AE0857df443F407632",
+    name: "GreatestOfAVAXTrenches",
+    ticker: "GOAT",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0xb9c188bc558a82a1ee9e75ae0857df443f407632/5226ba9706de0b7373cc568228777a95.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0xc55fa890fd62c25c85d46f57ac972f3f30839e2f": {
+    address: "0xC55Fa890fd62c25c85D46f57aC972f3F30839E2F",
+    name: "CRIME",
+    ticker: "CRIME",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0xc55fa890fd62c25c85d46f57ac972f3f30839e2f/d8ccd35ee78f7491542b8fc294787d60.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0x386905718368aded7e544a40ca2bd60ceb4d28b0": {
+    address: "0x386905718368aDeD7e544a40cA2Bd60cEb4D28B0",
+    name: "Eat The Banana ",
+    ticker: "BNANA",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0x386905718368aded7e544a40ca2bd60ceb4d28b0/0e8f068f130bc40c2d9cfd658fb96213.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0x8d8b084269f4b2ad111b60793e9f3577a7795605": {
+    address: "0x8D8B084269f4b2Ad111b60793e9f3577A7795605",
+    name: "Magic Internet Money",
+    ticker: "MIM",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0x8d8b084269f4b2ad111b60793e9f3577a7795605/e8527cb34b6151b4d78fd75bb6ad81c1.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0x4bf8cf8e8a20d965d585097256ecf2be98a5fbd8": {
+    address: "0x4Bf8cf8e8A20d965D585097256Ecf2BE98a5fbd8",
+    name: "BENIS",
+    ticker: "BENIS",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0x4bf8cf8e8a20d965d585097256ecf2be98a5fbd8/ba5847080fa5b935c3f51010d1ac969c.png",
+    decimals: 18,
+    rank: "",
+  },
+  "0x8877f4605ddfbc05cf37685de74e9f6232080a09": {
+    address: "0x8877f4605dDFBC05Cf37685De74E9f6232080a09",
+    name: "Vanya Lasagna",
+    ticker: "VANYA",
+    imgUrl:
+      "https://static.debank.com/image/avax_token/logo_url/0x8877f4605ddfbc05cf37685de74e9f6232080a09/ad5d7150a5b0f0135fd67e0301a53fdb.png",
+    decimals: 18,
+    rank: "",
+  },
 };

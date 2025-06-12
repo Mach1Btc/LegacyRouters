@@ -7,7 +7,7 @@ const Bottombar = () => {
             <div className='bottombar'>
                 <div className='flex flex-col items-center'>
                     <div className='logo'>
-                        <div className="rounded-md bg-ava-red p-2 h-8 w-8">
+                        <div className="rounded-md bg-ava-red p-2 h-8 w-8  flex items-center justify-center">
                             <img src="assets/Avalanche_Logomark_White.svg" />
                         </div>
                         <span className="hidden sm:flex">Legacy Routers</span>

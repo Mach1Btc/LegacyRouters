@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
-import { Loader, SlippageInput, TokenSearchChooser, AddressCopyLink } from '@/components/shared';
+import { Loader, SlippageInput, TokenSearchChooser, SwapInfo } from '@/components/shared';
 import { Separator } from '@/components/ui/separator';
 import { Switch } from "@/components/ui/switch";
 import BN from 'bn.js';
@@ -274,10 +274,13 @@ const PHARAOHSwapPanel = () => {
     };
 
     const getPairType = () => {
+        if (!currentPairExists) {
+            return "NA";
+        }
         if (WrapUtils.isWrapOperation(fromToken, toToken)) {
             return WrapUtils.isWrapping(fromToken, toToken) ? "wrapping" : "unwrapping";
         } else {
-            return useStablePool ? "stable" : "volatile"
+            return useStablePool ? "stable" : "volatile";
         }
     };
 
@@ -555,24 +558,7 @@ const PHARAOHSwapPanel = () => {
                                 >
                                     {getButtonText()}
                                 </Button>
-                                <div className="flex flex-col w-full mt-4 info-text">
-                                    <div className='flex flex-row justify-between '>
-                                        <span className='pointer-events-none select-none'>Router:</span>
-                                        <AddressCopyLink address={PHARAOH_ROUTER_ADDRESS} copyButton={true} externalLink={true} />
-                                    </div>
-                                    <div className='flex flex-row justify-between'>
-                                        <span className='no-select'>Pair:</span>
-                                        {currentPairExists ? (
-                                            <AddressCopyLink address={currentPairAddress} copyButton={true} externalLink={true} />
-                                        ) : (
-                                            <span className='text-red-500'>Pair Not Found</span>
-                                        )}
-                                    </div>
-                                    <div className='flex flex-row justify-between'>
-                                        <span className='no-select'>Type:</span>
-                                        <span className='pointer-events-none mr-7'>{getPairType()}</span>
-                                    </div>
-                                </div>
+                                <SwapInfo routerAddress={PHARAOH_ROUTER_ADDRESS} pairAddress={currentPairExists ? currentPairAddress : undefined} includeType={true} pairType={getPairType()} />
                             </div>
 
                         </div>

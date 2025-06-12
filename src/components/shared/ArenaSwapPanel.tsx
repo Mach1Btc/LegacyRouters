@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
-import { AddressCopyLink, Loader, SlippageInput, TokenSearchChooser } from '@/components/shared';
+import { Loader, SlippageInput, SwapInfo, TokenSearchChooser } from '@/components/shared';
 import { Separator } from '@/components/ui/separator';
 import { Switch } from "@/components/ui/switch"
 import BN from 'bn.js';
@@ -60,7 +60,7 @@ const ArenaSwapPanel = () => {
     const [hasWarned, setHasWarned] = useState<boolean>(false);
 
     const [extraSettingsOpen, setExtraSettingsOpen] = useState<boolean>(false);
-    const [supportFeeTokens, setSupportFeeTokens] = useState<boolean>(true);
+    const [supportFeeTokens, setSupportFeeTokens] = useState<boolean>(false);
 
     const [debounceTimer, setDebounceTimer] = useState<NodeJS.Timeout | null>(null);
 
@@ -566,20 +566,7 @@ const ArenaSwapPanel = () => {
                                 >
                                     {getButtonText()}
                                 </Button>
-                                <div className="flex flex-col w-full mt-4 info-text">
-                                    <div className='flex flex-row justify-between'>
-                                        <span className='no-select'>Router:</span>
-                                        <AddressCopyLink address={ARENA_TRADE_ROUTER_ADDRESS} copyButton={true} externalLink={true} />
-                                    </div>
-                                    <div className='flex flex-row justify-between'>
-                                        <span className='no-select'>Pair:</span>
-                                        {currentPairExists ? (
-                                            <AddressCopyLink address={currentPairAddress} copyButton={true} externalLink={true} />
-                                        ) : (
-                                            <span className='text-red-500'>Pair Not Found</span>
-                                        )}
-                                    </div>
-                                </div>
+                                <SwapInfo routerAddress={ARENA_TRADE_ROUTER_ADDRESS} pairAddress={currentPairExists ? currentPairAddress : undefined} />
                             </div>
 
                         </div>
