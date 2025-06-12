@@ -30,6 +30,9 @@
   --color-pharaoh-red: rgb(185, 58, 44);
   --color-pharaoh-red-hover: rgb(206, 117, 107);
 
+  --color-uniswap-pink: rgb(234, 73, 197);
+  --color-uniswap-pink-hover: rgb(240, 128, 214);
+
   --text-xxs: 0.625rem;
   --text-xxs--line-height: calc(1 / 0.625);
   --text-xxxs: 0.5rem;
@@ -143,9 +146,13 @@ body {
 }
 
 .lfj-swap-button {
-  @apply bg-lfj-purple hover:bg-lfj-purple-hover text-white flex gap-2 w-full items-center;
+  @apply bg-lfj-purple hover:bg-lfj-purple-hover text-white flex gap-2 w-full items-center cursor-pointer;
 }
 
 .pharaoh-swap-button {
-  @apply bg-pharaoh-red hover:bg-pharaoh-red-hover text-white flex gap-2 w-full items-center;
+  @apply bg-pharaoh-red hover:bg-pharaoh-red-hover text-white flex gap-2 w-full items-center cursor-pointer;
+}
+
+.uniswap-swap-button {
+  @apply bg-uniswap-pink hover:bg-uniswap-pink-hover text-white flex gap-2 w-full items-center cursor-pointer;
 }

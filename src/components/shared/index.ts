@@ -9,3 +9,4 @@ export { default as TokenSearchChooser } from "./TokenSearchChooser";
 export { default as Topbar } from "./Topbar";
 export { default as TokenChooser } from "./TokenChooser";
 export { default as SlippageInput } from "./SlippageInput";
+export { default as UniswapSwapPanel } from "./UniswapSwapPanel";

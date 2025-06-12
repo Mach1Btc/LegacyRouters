@@ -43,6 +43,26 @@ const Home = () => {
                         </span>
                     </div>
                 </Link>
+
+                {/* PHARAOH Button */}
+                <Link
+                    to="/Uniswap"
+                    className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                >
+                    <img
+                        src="/assets/UniswapLogo.png"
+                        alt="Uniswap Logo"
+                        className="w-96 h-48 object-cover group-hover:brightness-110 transition-all duration-300 relative z-10 bg-white"
+                    />
+                    {/* Background overlay */}
+                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300 z-20"></div>
+                    {/* Text overlay - separate from background */}
+                    <div className="absolute inset-0 flex items-center justify-center z-30">
+                        <span className="text-white font-bold text-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            Use Uniswap
+                        </span>
+                    </div>
+                </Link>
             </div>
         </div>
     )
