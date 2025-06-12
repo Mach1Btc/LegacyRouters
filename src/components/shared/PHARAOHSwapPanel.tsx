@@ -21,29 +21,38 @@ import { getAmountOut, createSwapTransaction, getPairAddressFor } from '@/lib/PH
 
 const PHARAOHSwapPanel = () => {
 
-    const { account, isConnected, tokenList, update, refresh } = useUserContext();
+    const {
+        account,
+        isConnected,
+        tokenList,
+        update,
+        refresh,
+        fromToken,
+        setFromToken,
+        toToken,
+        setToToken,
+        lastFromToken,
+        setLastFromToken,
+        lastToToken,
+        setLastToToken,
+        wasFromLastChanged,
+        setWasFromLastChanged } = useUserContext();
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const { openConnectModal } = useConnectModal();
 
-    const [fromToken, setFromToken] = useState<Token>(tokenList["0xAVAX"]);
-    const [lastFromToken, setLastFromToken] = useState<Token>(fromToken);
     const [fromAmount, setFromAmount] = useState<BN>(new BN(0));
     const [fromAmountInputValue, setFromAmountInputValue] = useState<string>('');
     const [fromTokenAllowance, setFromTokenAllowance] = useState<BN>(new BN(0));
     const [fromBalance, setFromTokenBalance] = useState<BN>(new BN(0));
 
-    const [toToken, setToToken] = useState<Token>(tokenList["0x152b9d0FdC40C096757F570A51E494bd4b943E50"]);
-    const [lastToToken, setLastToToken] = useState<Token>(toToken);
     const [toAmount, setToAmount] = useState<BN>(new BN(0));
     const [toAmountInputValue, setToAmountInputValue] = useState<string>('');
     const [toBalance, setToTokenBalance] = useState<BN>(new BN(0));
 
     const [amountOutComputed, setAmountOutComputed] = useState<BN>(new BN(0));
     const [amountInComputed, setAmountInComputed] = useState<BN>(new BN(0));
-
-    const [wasFromLastChanged, setWasFromLastChanged] = useState<boolean>(true);
 
     const [isFromAmountExact, setIsFromAmountExact] = useState<boolean>(true); // ALWAY true on Pharaoh, but kept for consistency
 
@@ -261,6 +270,14 @@ const PHARAOHSwapPanel = () => {
                     )}
                 </span>
             );
+        }
+    };
+
+    const getPairType = () => {
+        if (WrapUtils.isWrapOperation(fromToken, toToken)) {
+            return WrapUtils.isWrapping(fromToken, toToken) ? "wrapping" : "unwrapping";
+        } else {
+            return useStablePool ? "stable" : "volatile"
         }
     };
 
@@ -553,7 +570,7 @@ const PHARAOHSwapPanel = () => {
                                     </div>
                                     <div className='flex flex-row justify-between'>
                                         <span className='no-select'>Type:</span>
-                                        <span className='pointer-events-none mr-7'>{useStablePool ? "stable" : "volatile"}</span>
+                                        <span className='pointer-events-none mr-7'>{getPairType()}</span>
                                     </div>
                                 </div>
                             </div>

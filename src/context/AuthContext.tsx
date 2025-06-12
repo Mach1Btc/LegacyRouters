@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { getBalance } from "@wagmi/core";
 import { useAccount } from "wagmi";
 import { web3Config } from "@/context/Web3Context";
-import { Account, TokenList } from "@/lib/types";
+import { Account, Token, TokenList } from "@/lib/types";
 import BN from "bn.js";
 import { default_token_list } from "@/lib/tokenList";
 import { getERC20Balance } from "@/lib/ERC20";
@@ -24,6 +24,17 @@ const INITIAL_STATE = {
     tokenList: {},
     refresh: 0,
     update: () => { },
+
+    fromToken: default_token_list["0xAVAX"],
+    setFromToken: () => { },
+    toToken: default_token_list["0x152b9d0FdC40C096757F570A51E494bd4b943E50"],
+    setToToken: () => { },
+    lastFromToken: default_token_list["0xAVAX"],
+    setLastFromToken: () => { },
+    lastToToken: default_token_list["0x152b9d0FdC40C096757F570A51E494bd4b943E50"],
+    setLastToToken: () => { },
+    wasFromLastChanged: true,
+    setWasFromLastChanged: () => { },
 }
 
 type IContextType = {
@@ -35,6 +46,17 @@ type IContextType = {
     tokenList: TokenList
     refresh: number;
     update: () => void;
+
+    fromToken: Token;
+    setFromToken: React.Dispatch<React.SetStateAction<Token>>;
+    toToken: Token;
+    setToToken: React.Dispatch<React.SetStateAction<Token>>;
+    lastFromToken: Token;
+    setLastFromToken: React.Dispatch<React.SetStateAction<Token>>;
+    lastToToken: Token;
+    setLastToToken: React.Dispatch<React.SetStateAction<Token>>;
+    wasFromLastChanged: boolean;
+    setWasFromLastChanged: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AuthContext = createContext<IContextType>(INITIAL_STATE);
@@ -46,6 +68,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [isConnected, setIsConnected] = useState(connected);
     const [tokenList,] = useState<TokenList>(default_token_list);
     const [refresh, setRefresh] = useState(0);
+
+    const [fromToken, setFromToken] = useState<Token>(tokenList["0xAVAX"]);
+    const [toToken, setToToken] = useState<Token>(tokenList["0x152b9d0FdC40C096757F570A51E494bd4b943E50"]);
+    const [lastFromToken, setLastFromToken] = useState<Token>(fromToken);
+    const [lastToToken, setLastToToken] = useState<Token>(toToken);
+
+    const [wasFromLastChanged, setWasFromLastChanged] = useState<boolean>(true);
 
     const update = () => {
         setRefresh(prev => prev + 1);
@@ -124,6 +153,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         tokenList,
         refresh,
         update,
+
+        fromToken,
+        setFromToken,
+        toToken,
+        setToToken,
+        lastFromToken,
+        setLastFromToken,
+        lastToToken,
+        setLastToToken,
+        wasFromLastChanged,
+        setWasFromLastChanged
     };
 
     return (
