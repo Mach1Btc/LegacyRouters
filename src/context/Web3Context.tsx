@@ -61,8 +61,8 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         const config = getDefaultConfig({
-            appName: "Tundra",
-            projectId: "NA",
+            appName: "Avalanche Legacy Routers",
+            projectId: "ALR-43114",
             wallets: [
                 {
                     groupName: "Most used",
