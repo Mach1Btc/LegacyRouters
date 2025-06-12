@@ -3,7 +3,7 @@
 
 const Bottombar = () => {
     return (
-        <div className='bottombar-container'>
+        <div className='bottombar-container relative'>
             <div className='bottombar'>
                 <div className='flex flex-col items-center'>
                     <div className='logo'>
