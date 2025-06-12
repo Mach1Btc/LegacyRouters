@@ -60,7 +60,7 @@ const ArenaSwapPanel = () => {
     const [hasWarned, setHasWarned] = useState<boolean>(false);
 
     const [extraSettingsOpen, setExtraSettingsOpen] = useState<boolean>(false);
-    const [supportFeeTokens, setSupportFeeTokens] = useState<boolean>(false);
+    const [supportFeeTokens, setSupportFeeTokens] = useState<boolean>(true);
 
     const [debounceTimer, setDebounceTimer] = useState<NodeJS.Timeout | null>(null);
 

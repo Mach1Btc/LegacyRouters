@@ -61,7 +61,7 @@ const PHARAOHSwapPanel = () => {
     const [hasWarned, setHasWarned] = useState<boolean>(false);
 
     const [extraSettingsOpen, setExtraSettingsOpen] = useState<boolean>(false);
-    const [supportFeeTokens, setSupportFeeTokens] = useState<boolean>(false);
+    const [supportFeeTokens, setSupportFeeTokens] = useState<boolean>(true);
 
     const [useStablePool, setUseStablePool] = useState<boolean>(false);
 
