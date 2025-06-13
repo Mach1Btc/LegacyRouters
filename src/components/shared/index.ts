@@ -6,6 +6,8 @@ export { default as Loader } from "./Loader";
 export { default as LFJSwapPanel } from "./LFJSwapPanel";
 export { default as PangolinSwapPanel } from "./PangolinSwapPanel";
 export { default as PHARAOHSwapPanel } from "./PHARAOHSwapPanel";
+export { default as RouterSelecter } from "./RouterSelecter";
+export { default as ScrollToTop } from "./ScrollToTop";
 export { default as ThemeToggle } from "./ThemeToggle";
 export { default as TokenSearchChooser } from "./TokenSearchChooser";
 export { default as Topbar } from "./Topbar";

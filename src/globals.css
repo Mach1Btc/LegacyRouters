@@ -75,6 +75,7 @@ body {
 
 .topbar-links {
   @apply hidden lg:flex flex-row gap-4;
+  @apply absolute left-1/2 transform -translate-x-1/2;
 }
 
 .topbar-link {
@@ -82,7 +83,7 @@ body {
 }
 
 .topbar-link.active {
-  @apply font-semibold;
+  @apply font-semibold underline;
 }
 
 .connect-and-theme-button-wrapper {
