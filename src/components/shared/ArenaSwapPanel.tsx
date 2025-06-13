@@ -71,6 +71,8 @@ const ArenaSwapPanel = () => {
     const clearPanel = () => {
         setFromAmountInputValue('');
         setToAmountInputValue('');
+        setFromAmount(new BN(0));
+        setToAmount(new BN(0));
     }
 
     const handleFromInputChange = (value: string) => {
