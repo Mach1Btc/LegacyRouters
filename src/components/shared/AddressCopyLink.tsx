@@ -13,8 +13,6 @@ const AddressCopyLink: React.FC<AddressCopyLinkProps> = ({
     copyButton = true,
     externalLink = true
 }) => {
-    console.log(address);
-    console.log(!address);
     const [copied, setCopied] = useState(false)
 
     const handleCopy = async () => {

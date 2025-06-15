@@ -471,7 +471,7 @@ const PangolinSwapPanel = () => {
         <div className='flex flex-col gap-1 items-center justify-start'>
             <div>
                 <Card className='card swap-card'>
-                    <CardContent className='p-4'>
+                    <CardContent className='swap-card-content'>
                         <div className='flex-1 flex flex-col px-3'>
                             <div className='flex-1 flex flex-row p-2 pb-0 items-center'>
                                 <Input
@@ -556,7 +556,7 @@ const PangolinSwapPanel = () => {
                                     disabled={isConnected && (isLoading ||
                                         (fromAmount.isZero() && toAmount.isZero()) ||
                                         (!isFromAmountExact && amountInComputed.gt(fromBalance)) ||
-                                        (isFromAmountExact && fromAmount.gt(fromBalance)))
+                                        (isFromAmountExact && fromAmount.gt(fromBalance)) || !currentPairExists)
                                     }
                                     className="pangolin-swap-button"
                                     onClick={() => {

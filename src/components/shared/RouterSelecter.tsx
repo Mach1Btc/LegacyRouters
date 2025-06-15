@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 const RouterSelecter = () => {
     return (
-        <div className='w-[360px] min-h-[40px] flex flex-row items-center justify-between sm:hidden mt-4 sm:mt-0'>
+        <div className='w-[360px] min-h-[40px] flex flex-row items-center justify-between lg:hidden mt-4 lg:mt-0'>
             <NavLink
                 to="/LFJ"
                 className={({ isActive }) =>

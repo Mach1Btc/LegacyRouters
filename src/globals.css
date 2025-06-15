@@ -183,7 +183,11 @@ body {
 }
 
 .swap-card {
-  @apply w-[360px] sm:w-[540px] shadow-2xl mb-30 mt-10;
+  @apply w-[360px] sm:w-[540px] shadow-2xl mb-30 mt-10 pb-2;
+}
+
+.swap-card-content {
+  @apply px-4 pt-4 pb-2;
 }
 
 .info-text {
@@ -195,5 +199,5 @@ body {
 }
 
 .info-links {
-  @apply !font-sans !text-black;
+  @apply flex flex-row justify-between mt-3;
 }

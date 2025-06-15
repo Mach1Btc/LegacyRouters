@@ -465,7 +465,7 @@ const PHARAOHSwapPanel = () => {
         <div className='flex flex-col gap-1 items-center justify-start'>
             <div>
                 <Card className='card swap-card'>
-                    <CardContent className='p-4 pb-0'>
+                    <CardContent className='swap-card-content pb-0'>
                         <div className='flex-1 flex flex-col px-3'>
                             <div className='flex-1 flex flex-row p-2 pb-0 items-center'>
                                 <Input
@@ -548,7 +548,7 @@ const PHARAOHSwapPanel = () => {
                                     disabled={isConnected && (isLoading ||
                                         (fromAmount.isZero() && toAmount.isZero()) ||
                                         (!isFromAmountExact && amountInComputed.gt(fromBalance)) ||
-                                        (isFromAmountExact && fromAmount.gt(fromBalance)))}
+                                        (isFromAmountExact && fromAmount.gt(fromBalance)) || !currentPairExists)}
                                     className="pharaoh-swap-button"
                                     onClick={() => {
                                         if (isConnected) {
